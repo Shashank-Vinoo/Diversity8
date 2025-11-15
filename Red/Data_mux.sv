@@ -7,6 +7,7 @@ module Data_mux (
 
 
     assign Result = (ResultSrc)? ReadData: ALUResult;
-    
+
     
 endmodule
+
