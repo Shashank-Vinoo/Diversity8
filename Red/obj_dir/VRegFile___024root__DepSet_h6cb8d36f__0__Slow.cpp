@@ -11,7 +11,7 @@ VL_ATTR_COLD void VRegFile___024root___settle__TOP__0(VRegFile___024root* vlSelf
     VRegFile__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VRegFile___024root___settle__TOP__0\n"); );
     // Body
-    vlSelf->a0 = vlSelf->RegFile__DOT__registers[0U];
+    vlSelf->a0 = vlSelf->RegFile__DOT__registers[0xaU];
     vlSelf->RD1 = vlSelf->RegFile__DOT__registers[vlSelf->AD1];
     vlSelf->RD2 = vlSelf->RegFile__DOT__registers[vlSelf->AD2];
 }

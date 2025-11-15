@@ -16,7 +16,7 @@ VL_INLINE_OPT void VRegFile___024root___sequent__TOP__0(VRegFile___024root* vlSe
     CData/*0:0*/ __Vdlyvset__RegFile__DOT__registers__v0;
     // Body
     __Vdlyvset__RegFile__DOT__registers__v0 = 0U;
-    if (vlSelf->WE3) {
+    if (((IData)(vlSelf->WE3) & (0U != (IData)(vlSelf->AD3)))) {
         __Vdlyvval__RegFile__DOT__registers__v0 = vlSelf->WD3;
         __Vdlyvset__RegFile__DOT__registers__v0 = 1U;
         __Vdlyvdim0__RegFile__DOT__registers__v0 = vlSelf->AD3;
@@ -25,7 +25,7 @@ VL_INLINE_OPT void VRegFile___024root___sequent__TOP__0(VRegFile___024root* vlSe
         vlSelf->RegFile__DOT__registers[__Vdlyvdim0__RegFile__DOT__registers__v0] 
             = __Vdlyvval__RegFile__DOT__registers__v0;
     }
-    vlSelf->a0 = vlSelf->RegFile__DOT__registers[0U];
+    vlSelf->a0 = vlSelf->RegFile__DOT__registers[0xaU];
 }
 
 VL_INLINE_OPT void VRegFile___024root___combo__TOP__0(VRegFile___024root* vlSelf) {
