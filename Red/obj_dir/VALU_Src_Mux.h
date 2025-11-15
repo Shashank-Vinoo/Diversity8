@@ -5,34 +5,29 @@
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef VERILATED_VREGFILE_H_
-#define VERILATED_VREGFILE_H_  // guard
+#ifndef VERILATED_VALU_SRC_MUX_H_
+#define VERILATED_VALU_SRC_MUX_H_  // guard
 
 #include "verilated.h"
 
-class VRegFile__Syms;
-class VRegFile___024root;
+class VALU_Src_Mux__Syms;
+class VALU_Src_Mux___024root;
 
 // This class is the main interface to the Verilated model
-class VRegFile VL_NOT_FINAL : public VerilatedModel {
+class VALU_Src_Mux VL_NOT_FINAL : public VerilatedModel {
   private:
     // Symbol table holding complete model state (owned by this class)
-    VRegFile__Syms* const vlSymsp;
+    VALU_Src_Mux__Syms* const vlSymsp;
 
   public:
 
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&clk,0,0);
-    VL_IN8(&WE3,0,0);
-    VL_IN8(&AD1,4,0);
-    VL_IN8(&AD2,4,0);
-    VL_IN8(&AD3,4,0);
-    VL_IN(&WD3,31,0);
-    VL_OUT(&RD1,31,0);
-    VL_OUT(&RD2,31,0);
-    VL_OUT(&a0,31,0);
+    VL_IN8(&ALUsrc,0,0);
+    VL_IN(&regOp2,31,0);
+    VL_IN(&ImmOp,31,0);
+    VL_OUT(&ALUOp2,31,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
@@ -40,19 +35,19 @@ class VRegFile VL_NOT_FINAL : public VerilatedModel {
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.
-    VRegFile___024root* const rootp;
+    VALU_Src_Mux___024root* const rootp;
 
     // CONSTRUCTORS
     /// Construct the model; called by application code
     /// If contextp is null, then the model will use the default global context
     /// If name is "", then makes a wrapper with a
     /// single model invisible with respect to DPI scope names.
-    explicit VRegFile(VerilatedContext* contextp, const char* name = "TOP");
-    explicit VRegFile(const char* name = "TOP");
+    explicit VALU_Src_Mux(VerilatedContext* contextp, const char* name = "TOP");
+    explicit VALU_Src_Mux(const char* name = "TOP");
     /// Destroy the model; called (often implicitly) by application code
-    virtual ~VRegFile();
+    virtual ~VALU_Src_Mux();
   private:
-    VL_UNCOPYABLE(VRegFile);  ///< Copying not allowed
+    VL_UNCOPYABLE(VALU_Src_Mux);  ///< Copying not allowed
 
   public:
     // API METHODS

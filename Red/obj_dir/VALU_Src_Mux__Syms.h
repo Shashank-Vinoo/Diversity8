@@ -4,31 +4,31 @@
 // Internal details; most calling programs do not need this header,
 // unless using verilator public meta comments.
 
-#ifndef VERILATED_VREGFILE__SYMS_H_
-#define VERILATED_VREGFILE__SYMS_H_  // guard
+#ifndef VERILATED_VALU_SRC_MUX__SYMS_H_
+#define VERILATED_VALU_SRC_MUX__SYMS_H_  // guard
 
 #include "verilated.h"
 
 // INCLUDE MODEL CLASS
 
-#include "VRegFile.h"
+#include "VALU_Src_Mux.h"
 
 // INCLUDE MODULE CLASSES
-#include "VRegFile___024root.h"
+#include "VALU_Src_Mux___024root.h"
 
 // SYMS CLASS (contains all model state)
-class VRegFile__Syms final : public VerilatedSyms {
+class VALU_Src_Mux__Syms final : public VerilatedSyms {
   public:
     // INTERNAL STATE
-    VRegFile* const __Vm_modelp;
+    VALU_Src_Mux* const __Vm_modelp;
     bool __Vm_didInit = false;
 
     // MODULE INSTANCE STATE
-    VRegFile___024root             TOP;
+    VALU_Src_Mux___024root         TOP;
 
     // CONSTRUCTORS
-    VRegFile__Syms(VerilatedContext* contextp, const char* namep, VRegFile* modelp);
-    ~VRegFile__Syms();
+    VALU_Src_Mux__Syms(VerilatedContext* contextp, const char* namep, VALU_Src_Mux* modelp);
+    ~VALU_Src_Mux__Syms();
 
     // METHODS
     const char* name() { return TOP.name(); }

@@ -9,6 +9,18 @@ module RegFile(
     output logic [31:0] RD2,
     output logic [31:0] a0
 );
+    logic[31:0] registers[31:0];
+    always_comb begin
+        RD1 = registers[AD1];
+        RD2 = registers[AD2];
+        a0 = registers[0];
+    end
+
+    always_ff @( posedge clk ) begin
+        if(WE3) begin
+            registers[AD3] = WD3;
+        end
+    end
 
 
 

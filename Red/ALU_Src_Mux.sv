@@ -6,6 +6,9 @@ module ALU_Src_Mux(
 );
 
 
+    assign ALUOp2 = (ALUsrc) ? ImmOp : regOp2;
+
+
 endmodule
 
 

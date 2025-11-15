@@ -24,7 +24,6 @@ class VRegFile___024root final : public VerilatedModule {
     VL_OUT(RD2,31,0);
     VL_OUT(a0,31,0);
     VlUnpacked<IData/*31:0*/, 32> RegFile__DOT__registers;
-    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     VRegFile__Syms* const vlSymsp;

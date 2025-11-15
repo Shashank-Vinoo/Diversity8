@@ -6,8 +6,18 @@ module ALU(
     output logic EQ
 );
 
-   //test
+   always_comb begin
+        case(ALUctrl)
+            3'b000: ALU_out = ALU_Op1 +ALU_Op2;
+            3'b001: ALU_out = ALU_Op1 - ALU_Op2;
+            3'b101: ALU_out = (ALU_Op1< ALU_Op2)? 32'b1:32'b0;
+            3'b011: ALU_out = ALU_Op1 | ALU_Op2;
+            3'b010: ALU_out = ALU_Op1 & ALU_Op2;
+            default: ALU_out = 32'b0;
+        endcase
+   end
 
+    assign EQ = ALU_Op1 == ALU_Op2;
 
 
 endmodule

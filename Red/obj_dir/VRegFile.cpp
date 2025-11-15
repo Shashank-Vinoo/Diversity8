@@ -3,7 +3,6 @@
 
 #include "VRegFile.h"
 #include "VRegFile__Syms.h"
-#include "verilated_vcd_c.h"
 
 //============================================================
 // Constructors
@@ -53,7 +52,6 @@ static void _eval_initial_loop(VRegFile__Syms* __restrict vlSymsp) {
     vlSymsp->__Vm_didInit = true;
     VRegFile___024root___eval_initial(&(vlSymsp->TOP));
     // Evaluate till stable
-    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Initial loop\n"););
         VRegFile___024root___eval_settle(&(vlSymsp->TOP));
@@ -70,7 +68,6 @@ void VRegFile::eval_step() {
     // Initialize
     if (VL_UNLIKELY(!vlSymsp->__Vm_didInit)) _eval_initial_loop(vlSymsp);
     // Evaluate till stable
-    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Clock loop\n"););
         VRegFile___024root___eval(&(vlSymsp->TOP));
@@ -98,36 +95,3 @@ VL_ATTR_COLD void VRegFile::final() {
 const char* VRegFile::hierName() const { return vlSymsp->name(); }
 const char* VRegFile::modelName() const { return "VRegFile"; }
 unsigned VRegFile::threads() const { return 1; }
-std::unique_ptr<VerilatedTraceConfig> VRegFile::traceConfig() const {
-    return std::unique_ptr<VerilatedTraceConfig>{new VerilatedTraceConfig{false, false, false}};
-};
-
-//============================================================
-// Trace configuration
-
-void VRegFile___024root__trace_init_top(VRegFile___024root* vlSelf, VerilatedVcd* tracep);
-
-VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
-    // Callback from tracep->open()
-    VRegFile___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<VRegFile___024root*>(voidSelf);
-    VRegFile__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    if (!vlSymsp->_vm_contextp__->calcUnusedSigs()) {
-        VL_FATAL_MT(__FILE__, __LINE__, __FILE__,
-            "Turning on wave traces requires Verilated::traceEverOn(true) call before time 0.");
-    }
-    vlSymsp->__Vm_baseCode = code;
-    tracep->scopeEscape(' ');
-    tracep->pushNamePrefix(std::string{vlSymsp->name()} + ' ');
-    VRegFile___024root__trace_init_top(vlSelf, tracep);
-    tracep->popNamePrefix();
-    tracep->scopeEscape('.');
-}
-
-VL_ATTR_COLD void VRegFile___024root__trace_register(VRegFile___024root* vlSelf, VerilatedVcd* tracep);
-
-VL_ATTR_COLD void VRegFile::trace(VerilatedVcdC* tfp, int levels, int options) {
-    if (false && levels && options) {}  // Prevent unused
-    tfp->spTrace()->addModel(this);
-    tfp->spTrace()->addInitCb(&trace_init, &(vlSymsp->TOP));
-    VRegFile___024root__trace_register(&(vlSymsp->TOP), tfp->spTrace());
-}
