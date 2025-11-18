@@ -7,7 +7,7 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "gtest/gtest.h"
-#include "VALU_Src_Mux.h"
+#include "VImmGen.h"
 
 extern unsigned int ticks;
 
@@ -16,7 +16,7 @@ class BaseTestbench : public ::testing::Test
 public:
     void SetUp() override
     {
-        top = std::make_unique<VALU_Src_Mux>();
+        top = std::make_unique<VImmGen>();
 
 #ifndef __APPLE__
         tfp = std::make_unique<VerilatedVcdC>();
@@ -39,7 +39,7 @@ public:
     virtual void initializeInputs() = 0;
 
 protected:
-    std::unique_ptr<VALU_Src_Mux> top;
+    std::unique_ptr<VImmGen> top;
 
 #ifndef __APPLE__
     std::unique_ptr<VerilatedVcdC> tfp;

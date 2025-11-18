@@ -22,6 +22,14 @@ MK_FILE="V${TOP}.mk"
 EXE_FILE="V${TOP}"
 DUT="V${TOP}"       # Verilated DUT class name
 
+GTEST_PREFIX=$(brew --prefix googletest 2>/dev/null || echo "")
+if [ -d "${GTEST_PREFIX}/include" ]; then
+  GTEST_CFLAGS="-I${GTEST_PREFIX}/include"
+  GTEST_LDFLAGS="-L${GTEST_PREFIX}/lib"
+else
+  echo "[WARN] googletest not found. Install with: brew install googletest"
+fi
+
 # ============================================================
 # 1. Generate NON-templated base_testbench.h
 # ============================================================
@@ -104,12 +112,13 @@ echo "[INFO] Cleaning old obj_dir..."
 rm -rf obj_dir
 
 echo "[INFO] Running Verilator on ${SV_FILE} ..."
-
 verilator -Wall --cc "${SV_FILE}" \
   --exe "${TB_CPP}" \
   -I. \
   --trace \
-  -LDFLAGS "-lgtest -lgtest_main -pthread"
+  --CFLAGS "-std=c++17 ${GTEST_CFLAGS}" \
+  -LDFLAGS "${GTEST_LDFLAGS} -lgtest -lgtest_main -pthread"
+
 
 echo "[INFO] Building simulation..."
 make -j -C obj_dir -f "${MK_FILE}" "${EXE_FILE}"
