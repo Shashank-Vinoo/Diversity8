@@ -4,12 +4,20 @@
 
 Run all tests from the tb directory, `cd tb`
 
-### Top Level Verification Example
+### Top Level Verification
 
-`./doit.sh tests/{tb}`
-eg. `ryan@Ryans-MacBook-Pro tb % ./doit.sh tests/verify.cpp`
+`./doit.sh tests/{tb file}`   
+eg: 
+```
+cd tb 
+./runw.sh tests/verify.cpp
+```
 
-### Unit Level Verification Example
+### Unit Level Verification
 
-`./doit.sh tests/unit_tests/{tb}`
-eg. `ryan@Ryans-MacBook-Pro tb % ./doit.sh tests/unit_tests/mux_tb.cpp`
+`./doit.sh tests/unit_tests/{tb file}`  
+eg: 
+```
+cd tb
+./runw.sh tests/unit_tests/mux_tb.cpp
+```
