@@ -13,31 +13,26 @@ protected:
     }
 };
 
-TEST_F(ALU_Src_Mux_tb,T1)
+TEST_F(ALU_Src_Mux_tb, T1)
 {
     top->ALUsrc = 1;
     top->ImmOp = 12;
     top->regOp2 = 25;
     top->eval();
-    EXPECT_EQ(top->ALUOp2,12);
+    EXPECT_EQ(top->ALUOp2, 12);
 }
 
-TEST_F(ALU_Src_Mux_tb,T2)
+TEST_F(ALU_Src_Mux_tb, T2)
 {
     top->ALUsrc = 0;
     top->ImmOp = 12;
     top->regOp2 = 25;
     top->eval();
-    EXPECT_EQ(top->ALUOp2,25);
+    EXPECT_EQ(top->ALUOp2, 25);
 }
-
 
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-
-
-
-
