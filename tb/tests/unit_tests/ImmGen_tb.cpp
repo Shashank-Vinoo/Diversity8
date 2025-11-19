@@ -1,4 +1,4 @@
-#include "base_testbench.h"
+#include "../base_testbench.h"
 
 unsigned int ticks = 0;
 
@@ -9,11 +9,10 @@ protected:
     {
         top->ImmSrc = 0;
         top->instruction = 0;
-
     }
 };
 
-//fromt he
+// fromt he
 
 TEST_F(ImmGen_tb, ImmSrc_I_Type)
 {
@@ -43,10 +42,8 @@ TEST_F(ImmGen_tb, ImmSrc_B_Type)
     EXPECT_EQ((int32_t)top->Imm, -12);
 }
 
-
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-

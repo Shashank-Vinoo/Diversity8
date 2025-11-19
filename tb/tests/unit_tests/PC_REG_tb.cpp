@@ -1,4 +1,4 @@
-#include "base_testbench.h"
+#include "../base_testbench.h"
 
 unsigned int ticks = 0;
 
@@ -11,27 +11,24 @@ protected:
         top->rst = 0;
         top->next_PC = 0;
     }
-    void tick(){
-    // Falling edge
-    top->clk = 0;
-    top->eval();
+    void tick()
+    {
+        // Falling edge
+        top->clk = 0;
+        top->eval();
 
-    // Rising edge (this triggers the always_ff block)
-    top->clk = 1;
-    top->eval();
+        // Rising edge (this triggers the always_ff block)
+        top->clk = 1;
+        top->eval();
     }
 };
 
-
-
 TEST_F(PC_REG_tb, PC_REG_tb_T1)
 {
-    top->rst=1;
+    top->rst = 1;
     tick();
-    EXPECT_EQ(top->PC,0);
+    EXPECT_EQ(top->PC, 0);
 }
-
-
 
 TEST_F(PC_REG_tb, PC_REG_tb_T2)
 {
@@ -40,7 +37,6 @@ TEST_F(PC_REG_tb, PC_REG_tb_T2)
     tick();
     EXPECT_EQ(top->PC, 4);
 }
-
 
 TEST_F(PC_REG_tb, PC_REG_tb_sequence_T3)
 {
@@ -55,7 +51,6 @@ TEST_F(PC_REG_tb, PC_REG_tb_sequence_T3)
     tick();
     EXPECT_EQ(top->PC, 0);
 }
-
 
 int main(int argc, char **argv)
 {
