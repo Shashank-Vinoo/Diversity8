@@ -1,6 +1,6 @@
-module top_CPU(
+module top(
     input  logic clk,
-    input  logic rst
+    input  logic rst,
     output logic [31:0] a0
 );
 
@@ -39,9 +39,6 @@ logic [31:0] ALU_Op2;
 logic [31:0] ALU_out;
 logic EQ;
 
-
-
-//blue
 Branch_PC_Adder Branch_PC_Adder(
     .PC(PC),
     .ImmOp(ImmOp),
@@ -64,9 +61,6 @@ PCsrc_MUX PCsrc_MUX(
 
 assign inc_PC = PC + 32'd4;
 
-
-
-//green
 ControlUnit ControlUnit(
     .opcode(opcode),
     .funct3(funct3),
@@ -99,8 +93,6 @@ assign AD1 = instruction[19:15];
 assign AD2 = instruction[24:20];
 assign AD3 = instruction[11:7];
 
-
-//red
 ALU_Src_Mux ALU_Src_Mux(
     .regOp2(RD2),
     .ImmOp(ImmOp),

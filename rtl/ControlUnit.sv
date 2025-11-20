@@ -52,7 +52,7 @@ module ControlUnit(
                 ALUSrc    = 1'b1;
                 MemWrite  = 1'b1;
             end
-            7'b0000011: begin // I type 
+            7'b0000011: begin // I type - lw  
                 ALUOp     = 2'b00;
                 RegWrite  = 1'b1;
                 ImmSrc    = 2'b00; 
