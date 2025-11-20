@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.sv": "systemverilogheader",
+    "queue": "cpp",
+    "stack": "cpp"
+  }
+}
