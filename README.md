@@ -16,15 +16,13 @@ For example:
 **Windows**
 
 ```
-cd tb
-./runw.sh tests/verify.cpp
+cd tb ; ./runw.sh tests/verify.cpp
 ```
 
 **MacOS**
 
 ```
-cd tb
-./runm.sh tests/verify.cpp
+cd tb ; ./runm.sh tests/verify.cpp
 ```
 
 ### Unit Level Verification
@@ -35,13 +33,11 @@ For example:
 **Windows**
 
 ```
-cd tb
-./runw.sh tests/unit_tests/RegFile_tb.cpp
+cd tb ; ./runw.sh tests/unit_tests/RegFile_tb.cpp
 ```
 
 **MacOS**
 
 ```
-cd tb
-./runm.sh tests/unit_tests/RegFile_tb.cpp
+cd tb ; ./runm.sh tests/unit_tests/RegFile_tb.cpp
 ```
