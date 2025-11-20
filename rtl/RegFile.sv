@@ -1,5 +1,6 @@
 module RegFile(
     input logic clk,
+    input logic rst,
     input logic WE3,
     input logic [4:0] AD1,
     input logic [4:0] AD2,
@@ -17,12 +18,15 @@ module RegFile(
         a0 = registers[5'd10];
     end
 
-    always_ff @( posedge clk ) begin
+    always_ff @( posedge clk or posedge rst) begin
+        if(rst) begin
+        for(integer register_index = 0; register_index < 32; register_index++) 
+            registers[register_index] <= 32'b0;
+        end
         if(WE3 && AD3!= 5'b0) begin
             registers[AD3] <= WD3;
         end
     end
-
 
 
 endmodule

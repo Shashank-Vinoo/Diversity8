@@ -23,7 +23,7 @@ Run all tests from the tb directory, `cd tb`
 
 ### Top Level Verification
 
-`./doit.sh tests/{tb file}`
+`./run.sh tests/{tb file}`
 
 For example:
 
@@ -31,9 +31,13 @@ For example:
 cd tb ; ./run.sh tests/verify.cpp
 ```
 
+To simulate the CPU, inputting simply just rst and clk there is a simple Verilog testbench.
+This can be run with `cd tb ; ./run_clock.sh`
+This outputs a register dump in the terminal and then opens GTKWave with the waveform loaded
+
 ### Unit Level Verification
 
-`./doit.sh tests/unit_tests/{tb file}`
+`./run.sh tests/unit_tests/{tb file}`
 
 For example:
 

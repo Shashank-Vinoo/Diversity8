@@ -126,6 +126,7 @@ Data_mux Data_Mux(
 
 RegFile RegFile(
     .clk (clk),
+    .rst (rst),
     .WE3 (RegWrite),
     .AD1 (AD1),
     .AD2 (AD2),
