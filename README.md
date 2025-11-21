@@ -21,6 +21,17 @@ Run all tests from the tb directory, `cd tb`
 
 ---
 
+### Top Level Simulation
+
+To simulate the CPU without any assertions (GTEST), there is a simple Verilog testbench to do so. This is the easiest way to see a program running on the CPU.  
+This testbench inputs only rst and clk, compiling with IVerilog:
+
+```
+cd tb ; ./run_clock.sh
+```
+
+This outputs a register dump in the terminal and then opens GTKWave with the waveform loaded
+
 ### Top Level Verification
 
 `./run.sh tests/{tb file}`
@@ -30,10 +41,6 @@ For example:
 ```
 cd tb ; ./run.sh tests/verify.cpp
 ```
-
-To simulate the CPU, inputting simply just rst and clk there is a simple Verilog testbench.
-This can be run with `cd tb ; ./run_clock.sh`
-This outputs a register dump in the terminal and then opens GTKWave with the waveform loaded
 
 ### Unit Level Verification
 
