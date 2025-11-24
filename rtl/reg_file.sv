@@ -18,7 +18,7 @@ module reg_file(
         a0 = registers[5'd10];
     end
 
-    always_ff @( posedge clk or posedge rst) begin
+    always_ff @(negedge clk) begin
         if(rst) begin
         for(integer register_index = 0; register_index < 32; register_index++) 
             registers[register_index] <= 32'b0;

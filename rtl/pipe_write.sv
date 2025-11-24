@@ -1,6 +1,6 @@
 module pipe_write (
     input logic clk,
-    input logic reset,
+    input logic rst,
     input logic [31:0] read_data,
     input logic [31:0] alu_result_m,
     input logic [1:0] result_src_m,
@@ -23,7 +23,7 @@ module pipe_write (
             alu_result_w <= 31'b0;
             result_src_w <= 2'b0;
             reg_write_w <= 1'b0;
-            rdw <= 4'b0
+            rdw <= 4'b0;
             pc_plus_4w <= 31'b0;
         end
         else begin

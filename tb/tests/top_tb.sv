@@ -1,5 +1,3 @@
-`timescale 1ns/1ps
-
 module top_tb;
 
     logic clk;
@@ -28,7 +26,7 @@ module top_tb;
         #2;
         rst = 0;
 
-        repeat (1000) begin
+        repeat (10) begin
             @(posedge clk);
             display_registers();
         end

@@ -23,7 +23,12 @@ iverilog -g2012 -Wall -o "${OUT}" \
     "${RTL_DIR}/alu.sv" \
     "${RTL_DIR}/reg_file.sv" \
     "${RTL_DIR}/data_mem.sv" \
-    "${RTL_DIR}/data_mux.sv"
+    "${RTL_DIR}/data_mux.sv" \
+    "${RTL_DIR}/pipe_fetch.sv" \
+    "${RTL_DIR}/pipe_decode.sv" \
+    "${RTL_DIR}/pipe_mem.sv" \
+    "${RTL_DIR}/pipe_write.sv"
+
 
 echo "=== Running Simulation ==="
 vvp "${OUT}" +IMEM="${HEX_FILE}"
