@@ -49,5 +49,5 @@ cd tb ; ./run.sh tests/verify.cpp
 For example:
 
 ```
-cd tb ; ./run.sh tests/unit_tests/RegFile_tb.cpp
+cd tb ; ./run.sh tests/unit_tests/reg_file_tb.cpp
 ```

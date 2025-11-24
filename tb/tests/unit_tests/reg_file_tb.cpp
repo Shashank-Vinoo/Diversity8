@@ -7,7 +7,7 @@ class RegFile_tb : public BaseTestbench
 protected:
     void initializeInputs() override
     {
-        top->clk = 0;
+        top->clk = 1;
         top->we3 = 0;
         top->rs1 = 0;
         top->rs2 = 0;
@@ -17,11 +17,11 @@ protected:
     void tick()
     {
         // Falling edge
-        top->clk = 0;
+        top->clk = 1;
         top->eval();
 
-        // Rising edge (this triggers the always_ff block)
-        top->clk = 1;
+        // Falling edge (this triggers the always_ff block)
+        top->clk = 0;
         top->eval();
     }
 };
