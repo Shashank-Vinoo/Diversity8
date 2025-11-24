@@ -9,7 +9,7 @@ protected:
     {
         top->clk = 0;
         top->rst = 0;
-        top->next_PC = 0;
+        top->next_pc = 0;
     }
     void tick()
     {
@@ -27,29 +27,29 @@ TEST_F(PC_REG_tb, PC_REG_tb_T1)
 {
     top->rst = 1;
     tick();
-    EXPECT_EQ(top->PC, 0);
+    EXPECT_EQ(top->pc, 0);
 }
 
 TEST_F(PC_REG_tb, PC_REG_tb_T2)
 {
     top->rst = 0;
-    top->next_PC = 4;
+    top->next_pc = 4;
     tick();
-    EXPECT_EQ(top->PC, 4);
+    EXPECT_EQ(top->pc, 4);
 }
 
 TEST_F(PC_REG_tb, PC_REG_tb_sequence_T3)
 {
     top->rst = 0;
-    top->next_PC = 4;
+    top->next_pc = 4;
     tick();
-    EXPECT_EQ(top->PC, 4);
-    top->next_PC = 8;
+    EXPECT_EQ(top->pc, 4);
+    top->next_pc = 8;
     tick();
-    EXPECT_EQ(top->PC, 8);
+    EXPECT_EQ(top->pc, 8);
     top->rst = 1;
     tick();
-    EXPECT_EQ(top->PC, 0);
+    EXPECT_EQ(top->pc, 0);
 }
 
 int main(int argc, char **argv)

@@ -7,27 +7,27 @@ class Branch_PC_Adder_tb : public BaseTestbench
 protected:
     void initializeInputs() override
     {
-        top->PC = 0;
-        top->ImmOp = 0;
+        top->pc = 0;
+        top->imm_ext = 0;
     }
 };
 
 TEST_F(Branch_PC_Adder_tb, BranchAdderT1)
 {
-    top->PC = 0;
-    top->ImmOp = 20;
+    top->pc = 0;
+    top->imm_ext = 20;
     top->eval();
 
-    EXPECT_EQ(top->branch_PC, 20);
+    EXPECT_EQ(top->branch_pc, 20);
 }
 
 TEST_F(Branch_PC_Adder_tb, BranchAdderT2)
 {
-    top->PC = 34;
-    top->ImmOp = -5;
+    top->pc = 34;
+    top->imm_ext = -5;
     top->eval();
 
-    EXPECT_EQ(top->branch_PC, 29);
+    EXPECT_EQ(top->branch_pc, 29);
 }
 
 int main(int argc, char **argv)

@@ -7,37 +7,37 @@ class PCsrc_MUX_tb : public BaseTestbench
 protected:
     void initializeInputs() override
     {
-        top->PCsrc = 0;
-        top->branch_PC = 0;
-        top->inc_PC = 0;
+        top->pc_src = 0;
+        top->branch_pc = 0;
+        top->pc_plus4 = 0;
     }
 };
 
 TEST_F(PCsrc_MUX_tb, PCsrc_MUX_T1)
 {
-    top->PCsrc = 1;
-    top->branch_PC = 12;
-    top->inc_PC = 0;
+    top->pc_src = 1;
+    top->branch_pc = 12;
+    top->pc_plus4 = 0;
     top->eval();
-    EXPECT_EQ(top->next_PC, 12);
+    EXPECT_EQ(top->next_pc, 12);
 }
 
 TEST_F(PCsrc_MUX_tb, PCsrc_MUX_T2)
 {
-    top->PCsrc = 0;
-    top->branch_PC = 4;
-    top->inc_PC = 8;
+    top->pc_src = 0;
+    top->branch_pc = 4;
+    top->pc_plus4 = 8;
     top->eval();
-    EXPECT_EQ(top->next_PC, 8);
+    EXPECT_EQ(top->next_pc, 8);
 }
 
 TEST_F(PCsrc_MUX_tb, PCsrc_MUX_T3)
 {
-    top->PCsrc = 1;
-    top->branch_PC = 4;
-    top->inc_PC = 0;
+    top->pc_src = 1;
+    top->branch_pc = 4;
+    top->pc_plus4 = 0;
     top->eval();
-    EXPECT_EQ(top->next_PC, 4);
+    EXPECT_EQ(top->next_pc, 4);
 }
 
 int main(int argc, char **argv)

@@ -1,15 +1,13 @@
 module pc_src_mux(
-    input logic PCsrc,
-    input logic [31:0] branch_PC,
-    input logic [31:0] inc_PC,
-    output logic [31:0] next_PC
+    input  logic       pc_src,
+    input  logic [31:0] branch_pc,
+    input  logic [31:0] pc_plus4,
+    output logic [31:0] next_pc
 );
 
-    assign next_PC = (PCsrc) ? branch_PC : inc_PC;
-
-
+    assign next_pc = (pc_src) ? branch_pc : pc_plus4;
 
 endmodule
 
-// if PCsrc is high, next_PC = branch_PC
-// otherwise next_PC = inc_PC (+4 because it is byte addressed)
+// if pc_src is high, next_pc = branch_pc
+// otherwise next_pc = pc_plus4 (+4 because it is byte addressed)

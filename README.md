@@ -7,9 +7,9 @@
   - [x] Complete top level CPU
   - [x] Write testbench for top level
   - [x] Clean module names
-- [ ] Pipelined processor
-  - [ ] Pipelined control unit
-  - [ ] Insert stage registers
+- [x] Pipelined processor
+  - [x] Pipelined control unit
+  - [x] Insert stage registers
   - [ ] Testbench for simple pipelined CPU
   - [ ] Hazard unit:
     - [ ] Data hazard handling by forwarding

@@ -1,11 +1,11 @@
 module branch_pc_adder(
-    input logic [31:0] PC,
-    input logic [31:0] ImmOp,
-    output logic [31:0] branch_PC
+    input  logic [31:0] pc,
+    input  logic [31:0] imm_ext,
+    output logic [31:0] branch_pc
 );
 
-    assign branch_PC = PC + ImmOp;
+    assign branch_pc = pc + imm_ext;
 
 endmodule
 
-// branch_PC = PC + ImmOp
+// branch_pc = pc + imm_ext

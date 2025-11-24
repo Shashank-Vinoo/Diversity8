@@ -23,10 +23,10 @@ module top_tb;
 
     initial begin
         rst = 1;
-        #2;
+        #1;
         rst = 0;
 
-        repeat (10) begin
+        repeat (20) begin
             @(posedge clk);
             display_registers();
         end
@@ -46,8 +46,8 @@ module top_tb;
                     i+3, dut.reg_file_i.registers[i+3]);
             end
             $display("PC: %h  Instr: %h  a0: %h\n",
-                dut.PC,
-                dut.instruction,
+                dut.pc,
+                dut.instr_f,
                 dut.a0);
         end
     endtask
