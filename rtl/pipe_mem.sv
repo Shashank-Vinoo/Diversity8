@@ -1,37 +1,26 @@
 module pipe_mem(
     //inputs from the execute stage
-    input clk,
-    input reset,
-    input reg_write_e,
-    input [1:0] result_src_e,
-    input mem_write_e,
-    input [31:0] alu_result_e,
-    input wdata_e,
-    input [11:7] rde,
-    input [31:0] pc_plus4_e,
+    input logic clk,
+    input logic reset,
+    input logic reg_write_e,
+    input logic [1:0] result_src_e,
+    input logic mem_write_e,
+    input logic [31:0] alu_result_e,
+    input logic wdata_e,
+    input logic [11:7] rde,
+    input logic [31:0] pc_plus4_e,
     //outputs to the memory stage
-    output reg [] reg_write_m,
-    output reg [] result_src_m,
-    output reg [] mem_write_m,
-    output reg [] alu_result_m,
-    output reg [] wdata_m,
-    output reg [] rdm,
-    output reg [] pc_plus4_m
+    output logic  reg_write_m,
+    output logic result_src_m,
+    output logic mem_write_m,
+    output logic alu_result_m,
+    output logic wdata_m,
+    output logic rdm,
+    output logic pc_plus4_m
 );
 
-//intialize pipeline registers
-initial begin
-    reg_write_m = 0;
-    result_src_m = 0;
-    mem_write_m = 0;
-    alu_result_m = 0;
-    wdata_m = 0;
-    rdm = 0;
-    pc_plus4_m = 0;
-end
 
-//pipeline register between execute and memory stage
-always@(posedge clk)            
+always_ff @(posedge clk)            
     begin
         if(reset)
             begin
