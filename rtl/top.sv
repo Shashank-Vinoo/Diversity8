@@ -40,9 +40,12 @@ logic [31:0] ALU_out;
 logic EQ;
 logic [31:0] data_rd;
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
 branch_pc_adder branch_pc_adder_i(
     .PC(PC),
     .ImmOp(ImmOp),
@@ -63,8 +66,34 @@ pc_src_mux pc_src_mux_i(
     .next_PC(next_PC)
 );
 
-assign inc_PC = PC + 32'd4;
+// output for pipe_fetch_i
+logic [31:0] pcd;
+logic [31:0] pc_plus_4D;
 
+<<<<<<< Updated upstream
+=======
+pipe_fetch pipe_fetch_i(
+    .clk(clk), 
+    .rst(rst),
+    .read_data(instruction),
+    .pcf(PC),
+    .pc_plus_4F(inc_PC),
+    //outputs
+    .instr_D(instr_D),
+    .pcd(pcd),
+    .pc_plus_4D(pc_plus_4D)
+);
+
+// instruction decode
+assign inc_PC = PC + 32'd4;
+assign opcode = instr_D[6:0];
+assign funct3 = instr_D[14:12];
+assign funct7 = instr_D[31:25];
+assign AD1 = instr_D[19:15];
+assign AD2 = instr_D[24:20];
+assign AD3 = instr_D[11:7];
+
+>>>>>>> Stashed changes
 control_unit control_unit_i(
     .opcode(opcode),
     .funct3(funct3),
@@ -90,12 +119,6 @@ instr_mem instr_mem_i(
     .Read_Data(instruction)
 );
 
-assign opcode = instruction[6:0];
-assign funct3 = instruction[14:12];
-assign funct7 = instruction[31:25];
-assign AD1 = instruction[19:15];
-assign AD2 = instruction[24:20];
-assign AD3 = instruction[11:7];
 
 alu_src_mux alu_src_mux_i(
     .regOp2(RD2),
