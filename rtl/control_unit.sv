@@ -5,8 +5,7 @@ module control_unit(
     input  logic [2:0] funct3,
     input  logic [6:0] funct7,
 
-    output logic       branch_e,
-    output logic       brance_ne,
+    output logic [1:0] branch,
     output logic       jump,
     output logic       result_src,
     output logic       mem_write,
@@ -21,8 +20,7 @@ module control_unit(
         alu_op     = 2'b00;
         reg_write  = 1'b0;
         imm_src    = 2'b00;
-        branch_e  = 1'b0;
-        branch_ne = 1'b0;
+        branch  = 2'b0;
         alu_src    = 1'b0;
         mem_write  = 1'b0;
         result_src = 1'b0;
@@ -38,8 +36,8 @@ module control_unit(
                 alu_op     = 2'b10;
                 reg_write  = 1'b0;
                 imm_src    = 2'b10; 
-                branch_e  = (funct3 == 3'b000);
-                branch_ne = (funct3 == 3'b001);
+                branch[0]  = (funct3 == 3'b000);
+                branch[1] = (funct3 == 3'b001);
                 alu_src    = 1'b0;
             end
             7'b0100011: begin // S type 

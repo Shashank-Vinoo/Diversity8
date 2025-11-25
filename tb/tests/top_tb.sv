@@ -23,7 +23,7 @@ module top_tb;
 
     initial begin
         rst = 1;
-        #1;
+        #10;
         rst = 0;
 
         repeat (20) begin

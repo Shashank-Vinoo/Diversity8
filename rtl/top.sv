@@ -35,9 +35,7 @@ logic [31:0] wd3;
 //ALU
 logic [31:0] alu_out;
 logic alu_zero;
-logic branch_e_e;
-logic branch_ne_e;
-
+logic [1:0] branch_d;
 logic [31:0] data_mem_read; 
 
 logic [31:0] instr_d;      
@@ -49,8 +47,8 @@ logic [31:0] alu_op2_e;
 logic        reg_write_e;
 logic [1:0]  result_src_e;
 logic        mem_write_e;
-logic        jump_e;
-logic        branch_e;
+logic        jump_e = 1'b0;
+logic [1:0]      branch_e;
 logic [2:0]  alu_control_e;
 logic        alu_src_e;
 logic [1:0]  imm_src_e;
@@ -82,12 +80,12 @@ logic [1:0] result_src_d;
 assign result_src_d = {1'b0, result_src}; 
 
 
-ssign pc_src = (branch_e_e & alu_zero) | (branch_ne_e & ~alu_zero) | jump_e;
+assign pc_src = (branch_e[0] & alu_zero) | (branch_e[1] & ~alu_zero) | jump_e;
 
 
 branch_pc_adder branch_pc_adder_i(
-    .pc(pc),
-    .imm_ext(imm_ext_d),
+    .pc(pc_e),
+    .imm_ext(imm_ext_e),
     .branch_pc(branch_pc)
 );
 
@@ -118,9 +116,7 @@ control_unit control_unit_i(
     .opcode(opcode),
     .funct3(funct3),
     .funct7(funct7),
-    .branch_e(branch_e_d),
-    .branch_ne(branch_ne_d),
-    .pc_src(pc_src),
+    .branch(branch_d),
     .result_src(result_src),
     .mem_write(mem_write),
     .alu_control(alu_control),
@@ -197,7 +193,7 @@ pipe_fetch pipe_fetch_i(
     .pc_plus4_d(pc_plus4_d)
 );
 
-
+ 
 pipe_decode pipe_decode_i(
     .clk(clk),
     .rst(rst),
@@ -206,8 +202,7 @@ pipe_decode pipe_decode_i(
     .result_src_d(result_src_d),
     .mem_write_d(mem_write),
     .jump_d(1'b0),
-    .branch_e_d(brance_e_d),
-    .branch_ne_d(brance_ne_d),
+    .branch_d(branch_d),
     .alu_control_d(alu_control),
     .alu_src_d(alu_src),
     .imm_src_d(imm_src),
@@ -222,8 +217,7 @@ pipe_decode pipe_decode_i(
     .result_src_e(result_src_e),
     .mem_write_e(mem_write_e),
     //.jump_e(jump_e),
-    .branch_e_e(brance_e_e),
-    .branch_ne_e(brance_ne_e),
+    .branch_e(branch_e),
     .alu_control_e(alu_control_e),
     .alu_src_e(alu_src_e),
     .imm_src_e(imm_src_e),

@@ -7,7 +7,7 @@
   - [x] Complete top level CPU
   - [x] Write testbench for top level
   - [x] Clean module names
-- [x] Pipelined processor
+- [ ] Pipelined processor
   - [x] Pipelined control unit
   - [x] Insert stage registers
   - [ ] Testbench for simple pipelined CPU
