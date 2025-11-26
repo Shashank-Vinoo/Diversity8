@@ -13,7 +13,7 @@
   - [ ] Testbench for simple pipelined CPU
   - [ ] Hazard unit:
     - [ ] Data hazard handling by forwarding
-    - [ ] Control hazard handling by stalling
+    - [x] Control hazard handling by stalling
     - [ ] Stalling for lw data dependency
 
 ## Testbench usage
