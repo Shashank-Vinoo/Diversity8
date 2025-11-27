@@ -43,6 +43,9 @@ module top(
     logic [31:0] pc_plus4_d;
     logic [31:0] alu_op2_e;
 
+    logic [31:0] alu_input_a_e;
+    logic [31:0] alu_input_b_e;
+
     // Decode->Execute 
     logic        reg_write_e;
     logic [1:0]  result_src_e;
@@ -78,15 +81,25 @@ module top(
 
     logic [1:0] result_src_d;
 
+    /* Hazard unit: */
+
+    // flushing for pipes
+    logic flush;
+    logic flush_pipe;
+
+    // Forwarding signals
+    logic [1:0] forward_a_e;
+    logic [1:0] forward_b_e;    
+    logic [4:0] rs1_e;
+    logic [4:0] rs2_e;
+
 
     assign result_src_d = {1'b0, result_src}; 
 
 
     assign take_branch = (branch_e[0] & alu_zero) | (branch_e[1] & ~alu_zero) | jump_e;
 
-    // flushing for pipes
-    logic flush;
-    logic flush_pipe;
+   
 
 
     branch_pc_adder branch_pc_adder_i(
@@ -142,15 +155,27 @@ module top(
         .read_data(instr_f)
     );
 
+    alu_hazard_mux alu_hazard_mux_i(
+        .rd1_e(rd1_e),
+        .rd2_e(rd2_e),
+        .alu_result_m(alu_result_m),
+        .result_w(wd3),                 //smth sus happening here
+        .forward_a_e(forward_a_e),
+        .forward_b_e(forward_b_e),
+        .alu_input_a_e(alu_input_a_e),
+        .alu_input_b_e(alu_input_b_e)
+    );
+
+
     alu_src_mux alu_src_mux_i(
-        .reg_op2(rd2_e),
+        .reg_op2(alu_input_b_e),
         .imm_ext(imm_ext_e),
         .alu_src(alu_src_e),
         .alu_op2(alu_op2_e)
     );
 
     alu alu_i(
-        .alu_op1(rd1_e),
+        .alu_op1(alu_input_a_e),
         .alu_op2(alu_op2_e),
         .alu_ctrl(alu_control_e),
         .alu_out(alu_out),
@@ -277,10 +302,21 @@ module top(
     );
 
     assign flush_pipe = rst | flush;
+    assign rs1_e = instr_d[19:15];
+    assign rs2_e = instr_d[24:20];
 
     hazard_unit hazard_unit_i(
         .branch(take_branch),
-        .flush(flush)
+        .flush(flush),
+
+        .rs1_e(rs1_e),
+        .rs2_e(rs2_e),
+        .rd_m(rd_m),
+        .reg_write_m(reg_write_m),
+        .rd_w(rd_w),
+        .reg_write_w(reg_write_w),
+        .forward_a_e(forward_a_e),
+        .forward_b_e(forward_b_e)
     );
 
 

@@ -8,4 +8,3 @@ module branch_pc_adder(
 
 endmodule
 
-// branch_pc = pc + imm_ext

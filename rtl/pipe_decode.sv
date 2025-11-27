@@ -41,7 +41,7 @@ always_ff @(posedge clk) begin
         branch_e <= 2'b0;
         alu_control_e <= 3'b0;
         alu_src_e <= 1'b0;
-        imm_src_e <= 1'b0;
+        imm_src_e <= 2'b0;
         rd1_e <= 32'b0;
         rd2_e <= 32'b0;
         pc_e <= 32'b0;
