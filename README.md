@@ -24,8 +24,10 @@ Run all tests from the tb directory, `cd tb`
 
 ### Top Level Simulation
 
-To simulate the CPU without any assertions (GTEST), there is a simple Verilog testbench to do so. This is the easiest way to see a program running on the CPU.  
-This testbench inputs only rst and clk, compiling with IVerilog:
+To simulate the CPU without any assertions (GTEST), there is a simple Verilog testbench to do so. This is the easiest way to see a program running on the CPU.
+Add a program.hex file in the tb directory, at the same level as run_clock.sh
+
+This testbench inputs only rst and clk, compiling with Iverilog:
 
 ```
 cd tb ; ./run_clock.sh

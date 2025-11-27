@@ -31,8 +31,9 @@ iverilog -g2012 -Wall -o "${OUT}" \
     "${RTL_DIR}/pipe_mem.sv" \
     "${RTL_DIR}/pipe_write.sv" \
     "${RTL_DIR}/hazard_unit.sv" \
-    "${RTL_DIR}/control_hazard_unit.sv" #\
-   # "${RTL_DIR}/data_hazard_unit.sv" 
+    "${RTL_DIR}/control_hazard_unit.sv" \
+    "${RTL_DIR}/data_hazard_unit.sv" \
+    "${RTL_DIR}/alu_hazard_mux.sv" 
 
 
 echo "=== Running Simulation ==="

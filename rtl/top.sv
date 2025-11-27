@@ -263,7 +263,7 @@ module top(
 
     pipe_mem pipe_mem_i(
         .clk(clk),
-        .rst(flush_pipe),            
+        .rst(rst),            
 
         .reg_write_e(reg_write_e),
         .result_src_e(result_src_e),
@@ -284,7 +284,7 @@ module top(
 
     pipe_write pipe_write_i(
         .clk(clk),
-        .rst(flush_pipe),
+        .rst(rst),
 
         .read_data_m(data_mem_read),
         .alu_result_m(alu_result_m),
