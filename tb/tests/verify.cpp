@@ -131,6 +131,38 @@ TEST_F(CpuTestbench, fibonacci)
 }
 
 
+TEST_F(CpuTestbench, Data_Hazards)
+{
+    
+    compile("asm/DataHazards.S");
+
+    // cpu reset
+    top->rst = 1;
+    runSimulation(1);
+    top->rst = 0;
+
+    bool success = false;
+
+    // running enough cycles for lw to work
+    for (int i = 0; i < CYCLES; i++) {
+        runSimulation(1);
+        if (top->a0 == 21) {  
+            success = true;
+            SUCCEED();
+            break;
+        }
+    }
+
+    if (!success) {
+        FAIL() << "a0 is not 21 not valid";
+    }
+}
+
+
+
+
+
+
 
 int main(int argc, char **argv)
 {

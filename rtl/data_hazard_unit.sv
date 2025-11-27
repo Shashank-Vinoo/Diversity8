@@ -1,5 +1,4 @@
 module data_hazard_unit (
-
     input logic [4:0]   rs1_e,
     input logic [4:0]   rs2_e,
     input logic [4:0]   rd_m,
