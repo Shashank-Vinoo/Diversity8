@@ -15,6 +15,9 @@
     - [x] Data hazard handling by forwarding
     - [x] Control hazard handling by stalling
     - [ ] Stalling for lw data dependency
+- [ ] Cached processor
+  - [ ] Implementing cache
+  - [ ] Integrate cache
 
 ## Testbench usage
 
