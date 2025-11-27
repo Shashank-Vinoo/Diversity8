@@ -239,6 +239,8 @@ module top(
         .imm_src_d(imm_src),
         .rd1_d(rd1),
         .rd2_d(rd2),
+        .rs1_d(rs1_addr),
+        .rs2_d(rs2_addr),
         .pc_d(pc_d),          
         .rd_d(rd_addr),
         .imm_ext_d(imm_ext_d),
@@ -254,6 +256,8 @@ module top(
         .imm_src_e(imm_src_e),
         .rd1_e(rd1_e),
         .rd2_e(rd2_e),
+        .rs1_e(rs1_e),
+        .rs2_e(rs2_e),
         .pc_e(pc_e),
         .rd_e(rd_e),
         .imm_ext_e(imm_ext_e),
@@ -302,8 +306,6 @@ module top(
     );
 
     assign flush_pipe = rst | flush;
-    assign rs1_e = instr_d[19:15];
-    assign rs2_e = instr_d[24:20];
 
     hazard_unit hazard_unit_i(
         .branch(take_branch),
