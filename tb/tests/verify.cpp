@@ -153,6 +153,28 @@ TEST_F(CpuTestbench, DataHazards)
     }
 }
 
+TEST_F(CpuTestbench, LoadUseHazard)
+{
+    compile("asm/lw_hazard.S");
+    resetCpu();
+
+    bool success = false;
+
+    for (int i = 0; i < CYCLES; i++) {
+        runSimulation(1);
+        if (top->a0 == 20) {
+            success = true;
+            SUCCEED();
+            break;
+        }
+    }
+
+    if (!success) {
+        FAIL() << "Load-use hazard failed, a0 != 20. Current a0: " << top->a0;
+    }
+}
+
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
