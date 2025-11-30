@@ -53,7 +53,7 @@ module top(
     logic [1:0]  result_src_e;
     logic        mem_read_e;
     logic        mem_write_e;
-    logic        jump_e = 1'b0;
+    logic        jump_e;
     logic [1:0]      branch_e;
     logic [2:0]  alu_control_e;
     logic        alu_src_e;
