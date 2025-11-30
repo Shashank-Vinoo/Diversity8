@@ -102,6 +102,20 @@ for file in "${files[@]}"; do
                 -o Vdut \
                 -CFLAGS "-std=c++17 -isystem ${GTEST_INCLUDE}" \
                 -LDFLAGS "-L${GTEST_LIB} -lgtest -lgtest_main -lpthread"
+                
+if [[ $? -ne 0 ]]; then
+    echo "${RED}Error: Verilator failed to compile ${sv_file}.${RESET}"
+    exit 1
+fi
+
+    # Build C++ project with automatically generated Makefile
+    make -j -C obj_dir/ -f Vdut.mk
+
+# Abort if make failed
+if [[ $? -ne 0 ]]; then
+    echo "${RED}Error: make failed to build obj_dir/Vdut.${RESET}"
+    exit 1
+fi
 
     # Build C++ project with automatically generated Makefile
     make -j -C obj_dir/ -f Vdut.mk

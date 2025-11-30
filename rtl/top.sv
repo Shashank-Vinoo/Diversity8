@@ -37,6 +37,7 @@ module top(
     logic [31:0] alu_out;
     logic alu_zero;
     logic [1:0] branch_d;
+    logic jump_d;
     logic [31:0] data_mem_read; 
 
     logic [31:0] instr_d;      
@@ -56,7 +57,6 @@ module top(
     logic [1:0]      branch_e;
     logic [2:0]  alu_control_e;
     logic        alu_src_e;
-    logic [1:0]  imm_src_e;
     logic [31:0] rd1_e;
     logic [31:0] rd2_e;
     logic [31:0] pc_e;
@@ -141,6 +141,7 @@ module top(
         .funct3(funct3),
         .funct7(funct7),
         .branch(branch_d),
+        .jump(jump_d),
         .result_src(result_src),
         .mem_read(mem_read),
         .mem_write(mem_write),
@@ -240,11 +241,10 @@ module top(
         .result_src_d(result_src_d),
         .mem_read_d(mem_read),
         .mem_write_d(mem_write),
-        .jump_d(1'b0),
+        .jump_d(jump_d),
         .branch_d(branch_d),
         .alu_control_d(alu_control),
         .alu_src_d(alu_src),
-        .imm_src_d(imm_src),
         .rd1_d(rd1),
         .rd2_d(rd2),
         .rs1_d(rs1_addr),
@@ -258,11 +258,10 @@ module top(
         .result_src_e(result_src_e),
         .mem_read_e(mem_read_e),
         .mem_write_e(mem_write_e),
-        //.jump_e(jump_e),
+        .jump_e(jump_e),
         .branch_e(branch_e),
         .alu_control_e(alu_control_e),
         .alu_src_e(alu_src_e),
-        .imm_src_e(imm_src_e),
         .rd1_e(rd1_e),
         .rd2_e(rd2_e),
         .rs1_e(rs1_e),
@@ -282,7 +281,7 @@ module top(
         .result_src_e(result_src_e),
         .mem_write_e(mem_write_e),
         .alu_result_e(alu_out), 
-        .write_data_e(alu_input_b_e),              
+        .write_data_e(alu_input_b_e),         
         .rd_e(rd_e),
         .pc_plus4_e(pc_plus4_e),
 

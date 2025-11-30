@@ -9,7 +9,6 @@ module pipe_decode (
     input logic [1:0] branch_d,
     input logic [2:0] alu_control_d,
     input logic alu_src_d,
-    input logic [1:0] imm_src_d,
     input logic [31:0] rd1_d,
     input logic [31:0] rd2_d,
     input logic [4:0] rs1_d,
@@ -27,7 +26,6 @@ module pipe_decode (
     output logic [1:0] branch_e,
     output logic [2:0] alu_control_e,
     output logic alu_src_e,
-    output logic [1:0] imm_src_e,
     output logic [31:0] rd1_e,
     output logic [31:0] rd2_e,
     output logic [4:0] rs1_e,
@@ -48,7 +46,6 @@ always_ff @(posedge clk) begin
         branch_e <= 2'b0;
         alu_control_e <= 3'b0;
         alu_src_e <= 1'b0;
-        imm_src_e <= 2'b0;
         rd1_e <= 32'b0;
         rd2_e <= 32'b0;
         rs1_e <= 5'b0;
@@ -67,7 +64,6 @@ always_ff @(posedge clk) begin
         branch_e <= branch_d;
         alu_control_e <= alu_control_d;
         alu_src_e <= alu_src_d;
-        imm_src_e <= imm_src_d;
         rd1_e <= rd1_d;
         rd2_e <= rd2_d;
         rs1_e <= rs1_d;

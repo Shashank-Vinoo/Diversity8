@@ -1,3 +1,5 @@
+/* verilator lint_off UNUSED */
+
 module instr_mem#(
     parameter DEPTH = 1024
 )(
@@ -7,7 +9,7 @@ module instr_mem#(
 );
 
 logic [31:0] instruction_memory_rom [0:DEPTH-1];
-assign read_data = instruction_memory_rom[imem_addr[31:2]];
+assign read_data = instruction_memory_rom[imem_addr[11:2]];
 
 initial begin
     $display("Loading instruction memory from ");
@@ -16,7 +18,7 @@ end
 
 endmodule
 
-
+/* verilator lint_on UNUSED */
 
 
 

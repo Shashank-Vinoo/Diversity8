@@ -22,6 +22,7 @@ module control_unit(
         reg_write  = 1'b0;
         imm_src    = 2'b00;
         branch  = 2'b0;
+        jump = 1'b0;
         alu_src    = 1'b0;
         mem_read   = 1'b0;
         mem_write  = 1'b0;
