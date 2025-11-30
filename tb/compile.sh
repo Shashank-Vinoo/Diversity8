@@ -51,8 +51,8 @@ rm *dis 2>/dev/null
 riscv64-unknown-elf-objdump -f -d --source -m riscv \
                             a.out.reloc > ${SCRIPT_DIR}/${basename}.dis
 
-# Formats into a hex file
-od -v -An -t x1 "a.bin" | tr -s '\n' | awk '{$1=$1};1' > "${output_file}"
+# Formats into a hex file: one 32-bit word per line (little-endian)
+hexdump -v -e '1/4 "%08x\n"' "a.bin" > "${output_file}"
 
 rm "a.out.reloc"
 rm "a.out"

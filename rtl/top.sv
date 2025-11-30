@@ -282,7 +282,7 @@ module top(
         .result_src_e(result_src_e),
         .mem_write_e(mem_write_e),
         .alu_result_e(alu_out), 
-        .write_data_e(rd2_e),         
+        .write_data_e(alu_input_b_e),              
         .rd_e(rd_e),
         .pc_plus4_e(pc_plus4_e),
 

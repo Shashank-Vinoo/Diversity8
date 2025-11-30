@@ -11,7 +11,7 @@ assign read_data = instruction_memory_rom[imem_addr[31:2]];
 
 initial begin
     $display("Loading instruction memory from ");
-    $readmemh("program.hex", instruction_memory_rom);
+    $readmemh("../rtl/program.hex", instruction_memory_rom);
 end 
 
 endmodule

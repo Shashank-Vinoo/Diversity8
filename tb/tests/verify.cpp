@@ -28,7 +28,10 @@ protected:
 
 TEST_F(CpuTestbench, BaseProgramTest){
     bool success = false;
-    system("./compile.sh asm/program.S");
+    compile("asm/program.S");
+    top->rst = 1;
+    runSimulation(1);
+    top->rst = 0;
 
     for (int i = 0; i < CYCLES; i++)
     {

@@ -11,10 +11,10 @@
   - [x] Pipelined control unit
   - [x] Insert stage registers
   - [ ] Testbench for simple pipelined CPU
-  - [ ] Hazard unit:
+  - [x] Hazard unit:
     - [x] Data hazard handling by forwarding
     - [x] Control hazard handling by stalling
-    - [ ] Stalling for lw data dependency
+    - [x] Stalling for lw data dependency
 - [ ] Cached processor
   - [ ] Implementing cache
   - [ ] Integrate cache
@@ -28,7 +28,15 @@ Run all tests from the tb directory, `cd tb`
 ### Top Level Simulation
 
 To simulate the CPU without any assertions (GTEST), there is a simple Verilog testbench to do so. This is the easiest way to see a program running on the CPU.
-Add a program.hex file in the tb directory, at the same level as run_clock.sh
+Add a hex file in `rtl/program.hex`, making sure its in the format of:
+
+```
+00000513
+00100593
+00000063
+...
+...
+```
 
 This testbench inputs only rst and clk, compiling with Iverilog:
 
