@@ -1,4 +1,4 @@
-/* verilator lint_off UNUSEDSIGNAL */
+/* verilator lint_off UNUSED */
 module data_mem (
     input  logic [31:0] addr,
     input  logic        clk,
@@ -20,4 +20,4 @@ module data_mem (
 
     
 endmodule
-/* verilator lint_on UNUSEDSIGNAL */
+/* verilator lint_on UNUSED */
