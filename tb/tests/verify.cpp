@@ -10,11 +10,17 @@ class CpuTestbench : public Testbench
 protected:
     void initializeInputs() override
     {
-        top->clk = 1;
+        top->clk = 0;
+        top->rst = 1;
+    }
+
+    void resetCpu(int cycles = 2)
+    {
+        top->rst = 1;
+        runSimulation(cycles);
         top->rst = 0;
     }
 };
-
 
 // Note this is how we are going to test your CPU. Do not worry about this for
 // now, as it requires a lot more instructions to function
@@ -25,13 +31,11 @@ protected:
 //     EXPECT_EQ(top->a0, 5);
 // }
 
-
-TEST_F(CpuTestbench, BaseProgramTest){
+TEST_F(CpuTestbench, BaseProgram)
+{
     bool success = false;
     compile("asm/program.S");
-    top->rst = 1;
-    runSimulation(1);
-    top->rst = 0;
+    resetCpu();
 
     for (int i = 0; i < CYCLES; i++)
     {
@@ -45,127 +49,109 @@ TEST_F(CpuTestbench, BaseProgramTest){
     }
     if (!success)
     {
-        FAIL() << "Counter did not reach 254";
+        FAIL() << "Counter did not reach 254, current a0 value: " << top->a0;
     }
 }
-
 
 TEST_F(CpuTestbench, Countdown)
 {
     compile("asm/count_down.S");
-    // you need to reset the CPU as a previous test was already run
-    top->rst = 1;
-    runSimulation(1);
-    top->rst = 0;
+    resetCpu();
 
     bool success = false;
 
     // Run for enough cycles (30 is safe)
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 40; i++)
+    {
         runSimulation(1);
-        if (top->a0 == 0) {        
-            SUCCEED();
+        if (top->a0 == 0)
+        {
             success = true;
+            SUCCEED();
             break;
         }
     }
 
-    if (!success) {
-        FAIL() << "Countdown did not reach 0";
+    if (!success)
+    {
+        FAIL() << "Countdown did not reach 0, current a0 value: " << top->a0;
     }
 }
 
-
-
-TEST_F(CpuTestbench, StoreLoadTest)
+TEST_F(CpuTestbench, StoreLoad)
 {
-    
+
     compile("asm/store_load.S");
 
-    // cpu reset
-    top->rst = 1;
-    runSimulation(1);
-    top->rst = 0;
+    resetCpu();
 
     bool success = false;
 
     // running enough cycles for lw to work
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 40; i++)
         runSimulation(1);
-        if (top->a0 == 10) {  
-            success = true;
-            SUCCEED();
-            break;
-        }
+    
+    if (top->a0 == 10)
+    {
+        success = true;
+        SUCCEED();
     }
 
-    if (!success) {
-        FAIL() << "Store/load test: a0 did not become 10";
+    if (!success)
+    {
+        FAIL() << "a0 did not become 10, current a0 value: " << top->a0;
     }
 }
 
-
-
-TEST_F(CpuTestbench, fibonacci)
+TEST_F(CpuTestbench, Fibonacci10)
 {
-    
+
     compile("asm/fib_10.S");
 
-    // cpu reset
-    top->rst = 1;
-    runSimulation(1);
-    top->rst = 0;
+    resetCpu();
 
     bool success = false;
 
     // running enough cycles for lw to work
-    for (int i = 0; i < CYCLES; i++) {
+    for (int i = 0; i < CYCLES; i++)
         runSimulation(1);
-        if (top->a0 == 55) {  
-            success = true;
-            SUCCEED();
-            break;
-        }
+
+    if (top->a0 == 55)
+    {
+        success = true;
+        SUCCEED();
     }
 
-    if (!success) {
-        FAIL() << "a0 is not 55 so not right fib10 value";
+    if (!success)
+    {
+        FAIL() << "a0 is not 55 so not right fib10 value, current a0 value: " << top->a0;
     }
 }
 
-
-TEST_F(CpuTestbench, Data_Hazards)
+TEST_F(CpuTestbench, DataHazards)
 {
-    
-    compile("asm/DataHazards.S");
 
-    // cpu reset
-    top->rst = 1;
-    runSimulation(1);
-    top->rst = 0;
+    compile("asm/data_hazards.S");
+
+    resetCpu();
 
     bool success = false;
 
     // running enough cycles for lw to work
-    for (int i = 0; i < CYCLES; i++) {
+    for (int i = 0; i < CYCLES; i++)
         runSimulation(1);
-        if (top->a0 == 21) {  
-            success = true;
-            SUCCEED();
-            break;
-        }
+    
+    if (top->a0 == 21)
+    {
+        success = true;
+        SUCCEED();
     }
 
-    if (!success) {
-        FAIL() << "a0 is not 21 not valid";
+    if (!success)
+    {
+        FAIL() << "a0 is not 21 not valid, current a0 value: " << top->a0;
     }
 }
-
-
-
-
-
-
 
 int main(int argc, char **argv)
 {

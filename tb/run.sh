@@ -24,13 +24,18 @@ passes=0
 fails=0
 
 # Handle terminal arguments
+# If no arguments provided, run all tests we know about (root + unit_tests)
 if [[ $# -eq 0 ]]; then
-    # If no arguments provided, run all tests
-    # Use array-safe expansion
-    mapfile -t files < <(printf '%s\n' "${TEST_FOLDER}"/*.cpp)
+    shopt -s nullglob
+    files=("${TEST_FOLDER}"/*.cpp)
+    shopt -u nullglob
 else
-    # If arguments provided, use them as input files
     files=("$@")
+fi
+
+if [[ ${#files[@]} -eq 0 ]]; then
+    echo "${RED}Error: no test files found.${RESET}"
+    exit 1
 fi
 
 # Cleanup
@@ -95,6 +100,7 @@ for file in "${files[@]}"; do
     fi
 
     verilator   -Wall --trace \
+                --x-assign 0 --x-initial 0 \
                 -cc "${sv_file}" \
                 --exe "${file}" \
                 -y "${RTL_FOLDER}" \

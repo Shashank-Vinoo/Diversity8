@@ -12,22 +12,25 @@ public:
     // Runs the simulation for a clock cycle, evaluates the DUT, dumps waveform.
     void runSimulation(int cycles = 1)
     {
-        for (int i = 0; i < cycles; i++)
-        {
-            for (int clk = 0; clk < 2; clk++)
-            {
-                top->eval();
+        for (int i = 0; i < cycles; i++) {
+            // Drive a full low->high cycle and evaluate after each edge so
+            // reset/pipeline flops see the intended clock transition.
+            top->clk = 0;
+            top->eval();
 #ifndef __APPLE__
-                tfp->dump(2 * ticks + clk);
+            tfp->dump(2 * ticks);
 #endif
-                top->clk = !top->clk;
-            }
-            ticks++;
 
-            if (Verilated::gotFinish())
-            {
+            top->clk = 1;
+            top->eval();
+#ifndef __APPLE__
+            tfp->dump(2 * ticks + 1);
+#endif
+
+            if (Verilated::gotFinish()) {
                 exit(0);
             }
+            ticks++;
         }
     }
 

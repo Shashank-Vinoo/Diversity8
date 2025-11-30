@@ -16,6 +16,9 @@ class BaseTestbench : public ::testing::Test
 public:
     void SetUp() override
     {
+        // Make initial state deterministic across Verilator versions
+        Verilated::randReset(0);
+        ticks = 0;
         top = std::make_unique<Vdut>();
 #ifndef __APPLE__
         tfp = std::make_unique<VerilatedVcdC>();
