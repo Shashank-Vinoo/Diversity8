@@ -174,6 +174,26 @@ TEST_F(CpuTestbench, LoadUseHazard)
     }
 }
 
+TEST_F(CpuTestbench, GeneralHazards)
+{
+    compile("asm/general_hazards.S");
+    resetCpu();
+
+    bool success = false;
+
+    for (int i = 0; i < CYCLES; i++) {
+        runSimulation(1);
+        if (top->a0 == 28) {
+            success = true;
+            SUCCEED();
+            break;
+        }
+    }
+
+    if (!success) {
+        FAIL() << "GeneralHazards failed, a0 != 28. Current a0: " << top->a0;
+    }
+}
 
 int main(int argc, char **argv)
 {
