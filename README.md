@@ -14,16 +14,16 @@
   - [x] Hazard unit:
     - [x] Data hazard handling by forwarding
     - [x] Control hazard handling by stalling
-    - [x] Stalling for lw data dependency
+    - [ ] Stalling for lw data dependency
 - [ ] Cached processor
   - [ ] Implementing cache
   - [ ] Integrate cache
 
+---
+
 ## Testbench usage
 
 Run all tests from the tb directory, `cd tb`
-
----
 
 ### Top Level Simulation
 
@@ -48,7 +48,8 @@ This outputs a register dump in the terminal and then opens GTKWave with the wav
 
 ### Top Level Verification
 
-`./run.sh tests/{tb file}`
+This compiles various assembly programs and runs them asserting final state.  
+`./run.sh tests/verify.cpp`
 
 For example:
 
@@ -58,6 +59,7 @@ cd tb ; ./run.sh tests/verify.cpp
 
 ### Unit Level Verification
 
+This tests individual modules inside the CPU.  
 `./run.sh tests/unit_tests/{tb file}`
 
 For example:
