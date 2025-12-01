@@ -162,11 +162,12 @@ TEST_F(CpuTestbench, LoadUseHazard)
 
     for (int i = 0; i < CYCLES; i++) {
         runSimulation(1);
-        if (top->a0 == 20) {
-            success = true;
-            SUCCEED();
-            break;
-        }
+
+    }
+
+    if (top->a0 == 20) {
+        success = true;
+        SUCCEED();
     }
 
     if (!success) {
@@ -183,17 +184,17 @@ TEST_F(CpuTestbench, GeneralHazards)
 
     for (int i = 0; i < CYCLES; i++) {
         runSimulation(1);
-        if (top->a0 == 28) {
-            success = true;
-            SUCCEED();
-            break;
-        }
     }
-
+    if (top->a0 == 28) {
+        success = true;
+        SUCCEED();
+    }
     if (!success) {
         FAIL() << "GeneralHazards failed, a0 != 28. Current a0: " << top->a0;
     }
 }
+
+
 
 int main(int argc, char **argv)
 {
