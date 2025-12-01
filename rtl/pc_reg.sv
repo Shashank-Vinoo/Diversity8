@@ -16,3 +16,4 @@ endmodule
 
 // on each clk posedge, increment pc <= next_pc
 // if rst is high, pc <= 0
+// if pc_write is low, pc holds its value

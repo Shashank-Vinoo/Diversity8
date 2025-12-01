@@ -51,3 +51,5 @@ endmodule
 // rs1_e <= instr_d[19:15]      need to add in top.sv 
 // rs2_e <= instr_d[24:20]      need to add in top.sv
 //make a mux for ALU inputs in execute stage based on forward_a_e and forward_b_e signals
+
+// stall should freeze F->D and D->E pipline registers 

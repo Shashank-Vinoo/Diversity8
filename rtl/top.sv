@@ -97,26 +97,28 @@ module top(
 
     // Stalling
     logic stall;
-
+    logic [31:0] next_pc_gated; // determine next_pc based on stall
 
     assign result_src_d = {1'b0, result_src}; 
 
 
     assign take_branch = (branch_e[0] & alu_zero) | (branch_e[1] & ~alu_zero) | jump_e;
-
+    
    
-
+   
 
     branch_pc_adder branch_pc_adder_i(
         .pc(pc_e),
         .imm_ext(imm_ext_e),
         .branch_pc(branch_pc)
     );
+     
+    assign next_pc_gated = stall ? pc : next_pc;
 
     pc_reg pc_reg_i(
         .clk(clk),
         .rst(rst),
-        .next_pc(next_pc),
+        .next_pc(next_pc_gated),
         .pc(pc)
     );
 
@@ -235,7 +237,7 @@ module top(
     
     pipe_decode pipe_decode_i(
         .clk(clk),
-        .rst(flush_pipe),
+        .rst(flush_pipe | stall),
         
         .reg_write_d(reg_write),
         .result_src_d(result_src_d),
