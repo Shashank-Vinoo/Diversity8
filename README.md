@@ -10,14 +10,20 @@
 - [ ] Pipelined processor
   - [x] Pipelined control unit
   - [x] Insert stage registers
-  - [ ] Testbench for simple pipelined CPU
+  - [x] Testbench for simple pipelined CPU
   - [x] Hazard unit:
     - [x] Data hazard handling by forwarding
     - [x] Control hazard handling by stalling
-    - [ ] Stalling for lw data dependency
+    - [x] Stalling for lw data dependency
 - [ ] Cached processor
-  - [ ] Implementing cache
-  - [ ] Integrate cache
+  - [x] Implementing cache
+  - [x] Integrate cache
+  - [ ] Testbench for cache
+- [ ] Extensions
+  - [ ] Branch prediction
+  - [ ] Multilpy extension
+  - [ ] FPGA
+  - [ ] Superscalar architecture?
 
 ---
 
