@@ -23,7 +23,7 @@ module top(
     logic take_branch;
     logic result_src;
     logic mem_write;
-    logic [2:0] alu_control;
+    logic [3:0] alu_control;
     logic alu_src;
     logic [1:0] imm_src;
     logic reg_write;
@@ -58,7 +58,7 @@ module top(
     logic        mem_write_e;
     logic        jump_e;
     logic [1:0]      branch_e;
-    logic [2:0]  alu_control_e;
+    logic [3:0]  alu_control_e;
     logic        alu_src_e;
     logic [31:0] rd1_e;
     logic [31:0] rd2_e;

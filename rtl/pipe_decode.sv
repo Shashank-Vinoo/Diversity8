@@ -7,7 +7,7 @@ module pipe_decode (
     input logic mem_write_d,
     input logic jump_d,
     input logic [1:0] branch_d,
-    input logic [2:0] alu_control_d,
+    input logic [3:0] alu_control_d,
     input logic alu_src_d,
     input logic [31:0] rd1_d,
     input logic [31:0] rd2_d,
@@ -26,7 +26,7 @@ module pipe_decode (
     output logic mem_write_e,
     output logic jump_e,
     output logic [1:0] branch_e,
-    output logic [2:0] alu_control_e,
+    output logic [3:0] alu_control_e,
     output logic alu_src_e,
     output logic [31:0] rd1_e,
     output logic [31:0] rd2_e,
@@ -48,7 +48,7 @@ always_ff @(posedge clk) begin
         mem_write_e <= 1'b0;
         jump_e <= 1'b0;
         branch_e <= 2'b0;
-        alu_control_e <= 3'b0;
+        alu_control_e <= 4'b0;
         alu_src_e <= 1'b0;
         rd1_e <= 32'b0;
         rd2_e <= 32'b0;

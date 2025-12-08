@@ -10,7 +10,8 @@ module control_unit(
     output logic       result_src,
     output logic       mem_read,
     output logic       mem_write,
-    output logic [2:0] alu_control,
+    // made 4 bits to accommodate more ALU operations
+    output logic [3:0] alu_control,
     output logic       alu_src,
     output logic [1:0] imm_src,
     output logic       reg_write
@@ -71,30 +72,41 @@ module control_unit(
 
     always_comb begin
         unique case (alu_op)
-            2'b00: alu_control = 3'b000; // ADD
-            2'b01: alu_control = 3'b001; // SUB
+            2'b00: alu_control = 4'b0000; // ADD
+            2'b01: alu_control = 4'b0001; // SUB
             2'b10: begin
-                if (funct7[0] ==1'b1) begin
-                    // multiply instructions
-                    // Add flag saying its a multiply operation 
-                    // remember to pass through pipeline decode to execute pipe
+                if (funct7 ==7'b0000001) begin
+                    // MULDIV instructions
 
+                    unique case (funct3)
+                        3'b000: alu_control = 4'b1000; // MUL
+                        3'b001: alu_control = 4'b1001; // MULH
+                        3'b010: alu_control = 4'b1010; // MULHSU
+                        3'b011: alu_control = 4'b1011; // MULHU
+
+                        3'b100: alu_control = 4'b1100; // DIV
+                        3'b101: alu_control = 4'b1101; // DIVU
+                        3'b110: alu_control = 4'b1110; // REM
+                        3'b111: alu_control = 4'b1111; // REMU
+                        
+                        default: alu_control = 4'b0000;
+                    endcase
                 end
                 else begin 
                     unique case (funct3)
                         3'b000: begin
                             if ({opcode[5], funct7[5]} == 2'b11)
-                                alu_control = 3'b001; // SUB
+                                alu_control = 4'b0001; // SUB
                             else
-                                alu_control = 3'b000; // ADD 
+                                alu_control = 4'b0000; // ADD 
                         end
-                        3'b110: alu_control = 3'b011; // AND
-                        3'b111: alu_control = 3'b010; // OR
-                        default: alu_control = 3'b000;
+                        3'b110: alu_control = 4'b0011; // AND
+                        3'b111: alu_control = 4'b0010; // OR
+                        default: alu_control = 4'b0000;
                     endcase
                 end
             end
-            default: alu_control = 3'b000;
+            default: alu_control = 4'b0000;
         endcase
     end
 

@@ -10,11 +10,11 @@ module alu(
 
    always_comb begin
         case(alu_ctrl)
-            3'b000: alu_out = alu_op1 + alu_op2;
-            3'b001: alu_out = alu_op1 - alu_op2;
-            3'b101: alu_out = (alu_op1 < alu_op2) ? 32'b1 : 32'b0;
-            3'b011: alu_out = alu_op1 | alu_op2;
-            3'b010: alu_out = alu_op1 & alu_op2;
+            4'b0000: alu_out = alu_op1 + alu_op2;
+            4'b0001: alu_out = alu_op1 - alu_op2;
+            4'b0101: alu_out = (alu_op1 < alu_op2) ? 32'b1 : 32'b0;
+            4'b0011: alu_out = alu_op1 | alu_op2;
+            4'b0010: alu_out = alu_op1 & alu_op2;
             // Add Multiply and divide operations according to the alu control signal
             default: alu_out = 32'b0;
         endcase
