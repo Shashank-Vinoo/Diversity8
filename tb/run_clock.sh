@@ -34,7 +34,8 @@ iverilog -g2012 -Wall -o "${OUT}" \
     "${RTL_DIR}/hazard_unit.sv" \
     "${RTL_DIR}/control_hazard_unit.sv" \
     "${RTL_DIR}/data_hazard_unit.sv" \
-    "${RTL_DIR}/alu_hazard_mux.sv" 
+    "${RTL_DIR}/alu_hazard_mux.sv" \
+    "${RTL_DIR}/branch_predictor.sv"
 
 
 echo "=== Running Simulation ==="
