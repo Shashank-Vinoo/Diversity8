@@ -74,17 +74,25 @@ module control_unit(
             2'b00: alu_control = 3'b000; // ADD
             2'b01: alu_control = 3'b001; // SUB
             2'b10: begin
-                unique case (funct3)
-                    3'b000: begin
-                        if ({opcode[5], funct7[5]} == 2'b11)
-                            alu_control = 3'b001; // SUB
-                        else
-                            alu_control = 3'b000; // ADD 
-                    end
-                    3'b110: alu_control = 3'b011; // AND
-                    3'b111: alu_control = 3'b010; // OR
-                    default: alu_control = 3'b000;
-                endcase
+                if (funct7[0] ==1'b1) begin
+                    // multiply instructions
+                    // Add flag saying its a multiply operation 
+                    // remember to pass through pipeline decode to execute pipe
+
+                end
+                else begin 
+                    unique case (funct3)
+                        3'b000: begin
+                            if ({opcode[5], funct7[5]} == 2'b11)
+                                alu_control = 3'b001; // SUB
+                            else
+                                alu_control = 3'b000; // ADD 
+                        end
+                        3'b110: alu_control = 3'b011; // AND
+                        3'b111: alu_control = 3'b010; // OR
+                        default: alu_control = 3'b000;
+                    endcase
+                end
             end
             default: alu_control = 3'b000;
         endcase
