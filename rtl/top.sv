@@ -39,9 +39,6 @@ module top(
     logic [1:0] branch_d;
     logic jump_d;
     logic [31:0] cache_read_data; 
-    /* verilator lint_off UNUSEDSIGNAL */
-    logic        cache_hit;
-    /* verilator lint_on UNUSEDSIGNAL */
     logic [31:0] backing_read_data;
 
     logic [31:0] instr_d;      
@@ -210,8 +207,7 @@ module top(
         .write_en(mem_write_m),
         .write_data(write_data_m),
         .backing_read_data(backing_read_data),
-        .read_data(cache_read_data),
-        .hit(cache_hit)
+        .read_data(cache_read_data)
     );
 
     data_mux data_mux_i(

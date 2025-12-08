@@ -8,8 +8,7 @@ module cache(
     input  logic [31:0] write_data,
     input  logic [31:0] backing_read_data,
 
-    output logic [31:0] read_data,
-    output logic hit
+    output logic [31:0] read_data
 );
 
     /*
@@ -23,6 +22,8 @@ module cache(
     localparam NUM_SETS = 16;
     localparam NUM_WAYS = 2;
     localparam BLOCK_WORDS = 4;
+
+    logic hit;
 
     logic [31:0] data_array [NUM_SETS-1:0][NUM_WAYS-1:0][BLOCK_WORDS-1:0];
     logic [23:0] tag_array [NUM_SETS-1:0][NUM_WAYS-1:0];
