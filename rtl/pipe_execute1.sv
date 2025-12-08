@@ -7,7 +7,7 @@ module pipe_execute1(
     input logic        mem_write_e1,
     input logic        jump_e1,
     input logic [1:0]  branch_e1,
-    input logic [2:0]  alu_control_e1,
+    input logic [3:0]  alu_control_e1,
     input logic        alu_src_e1,
     input logic [31:0] rd1_e1,          
     input logic [31:0] rd2_e1,          
@@ -23,7 +23,7 @@ module pipe_execute1(
     output logic        mem_write_e2,
     output logic        jump_e2,
     output logic [1:0]  branch_e2,
-    output logic [2:0]  alu_control_e2,
+    output logic [3:0]  alu_control_e2,
     output logic        alu_src_e2,
     output logic [31:0] rd1_e2,
     output logic [31:0] rd2_e2,
@@ -42,7 +42,7 @@ module pipe_execute1(
             mem_write_e2   <= 1'b0;
             jump_e2        <= 1'b0;
             branch_e2      <= 2'b0;
-            alu_control_e2 <= 3'b0;
+            alu_control_e2 <= 4'b0;
             alu_src_e2     <= 1'b0;
             rd1_e2         <= 32'b0;
             rd2_e2         <= 32'b0;

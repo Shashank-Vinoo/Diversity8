@@ -26,7 +26,7 @@ module pipe_decode (
     output logic mem_write_e1,
     output logic jump_e1,
     output logic [1:0] branch_e1,
-    output logic [2:0] alu_control_e1,
+    output logic [3:0] alu_control_e1,
     output logic alu_src_e1,
     output logic [31:0] rd1_e1,
     output logic [31:0] rd2_e1,
@@ -48,7 +48,7 @@ always_ff @(posedge clk) begin
         mem_write_e1 <= 1'b0;
         jump_e1 <= 1'b0;
         branch_e1 <= 2'b0;
-        alu_control_e1 <= 3'b0;
+        alu_control_e1 <= 4'b0;
         alu_src_e1 <= 1'b0;
         rd1_e1 <= 32'b0;
         rd2_e1 <= 32'b0;
