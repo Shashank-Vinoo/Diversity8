@@ -20,66 +20,66 @@ module pipe_decode (
     input logic        pred_taken_d,
     input logic [31:0] pred_pc_d,
     
-    output logic reg_write_e,
-    output logic [1:0] result_src_e,
-    output logic mem_read_e,
-    output logic mem_write_e,
-    output logic jump_e,
-    output logic [1:0] branch_e,
-    output logic [2:0] alu_control_e,
-    output logic alu_src_e,
-    output logic [31:0] rd1_e,
-    output logic [31:0] rd2_e,
-    output logic [4:0] rs1_e,
-    output logic [4:0] rs2_e,
-    output logic [31:0] pc_e,
-    output logic [4:0] rd_e,
-    output logic [31:0] imm_ext_e,
-    output logic [31:0] pc_plus4_e,
-    output logic        pred_taken_e,
-    output logic [31:0] pred_pc_e
+    output logic reg_write_e1,
+    output logic [1:0] result_src_e1,
+    output logic mem_read_e1,
+    output logic mem_write_e1,
+    output logic jump_e1,
+    output logic [1:0] branch_e1,
+    output logic [2:0] alu_control_e1,
+    output logic alu_src_e1,
+    output logic [31:0] rd1_e1,
+    output logic [31:0] rd2_e1,
+    output logic [4:0] rs1_e1,
+    output logic [4:0] rs2_e1,
+    output logic [31:0] pc_e1,
+    output logic [4:0] rd_e1,
+    output logic [31:0] imm_ext_e1,
+    output logic [31:0] pc_plus4_e1,
+    output logic        pred_taken_e1,
+    output logic [31:0] pred_pc_e1
 );
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        reg_write_e <= 1'b0;
-        result_src_e <= 2'b0;
-        mem_read_e <= 1'b0;
-        mem_write_e <= 1'b0;
-        jump_e <= 1'b0;
-        branch_e <= 2'b0;
-        alu_control_e <= 3'b0;
-        alu_src_e <= 1'b0;
-        rd1_e <= 32'b0;
-        rd2_e <= 32'b0;
-        rs1_e <= 5'b0;
-        rs2_e <= 5'b0;
-        pc_e <= 32'b0;
-        rd_e <= 5'b0;
-        imm_ext_e <= 32'b0;
-        pc_plus4_e <= 32'b0;
-        pred_taken_e <= 1'b0;
-        pred_pc_e <= 32'b0;
+        reg_write_e1 <= 1'b0;
+        result_src_e1 <= 2'b0;
+        mem_read_e1 <= 1'b0;
+        mem_write_e1 <= 1'b0;
+        jump_e1 <= 1'b0;
+        branch_e1 <= 2'b0;
+        alu_control_e1 <= 3'b0;
+        alu_src_e1 <= 1'b0;
+        rd1_e1 <= 32'b0;
+        rd2_e1 <= 32'b0;
+        rs1_e1 <= 5'b0;
+        rs2_e1 <= 5'b0;
+        pc_e1 <= 32'b0;
+        rd_e1 <= 5'b0;
+        imm_ext_e1 <= 32'b0;
+        pc_plus4_e1 <= 32'b0;
+        pred_taken_e1 <= 1'b0;
+        pred_pc_e1 <= 32'b0;
     end 
     else begin
-        reg_write_e <= reg_write_d;
-        result_src_e <= result_src_d;
-        mem_read_e <= mem_read_d;
-        mem_write_e <= mem_write_d;
-        jump_e <= jump_d;
-        branch_e <= branch_d;
-        alu_control_e <= alu_control_d;
-        alu_src_e <= alu_src_d;
-        rd1_e <= rd1_d;
-        rd2_e <= rd2_d;
-        rs1_e <= rs1_d;
-        rs2_e <= rs2_d;
-        pc_e <= pc_d;
-        rd_e <= rd_d;
-        imm_ext_e <= imm_ext_d;
-        pc_plus4_e <= pc_plus4_d;
-        pred_taken_e <= pred_taken_d;
-        pred_pc_e <= pred_pc_d;
+        reg_write_e1 <= reg_write_d;
+        result_src_e1 <= result_src_d;
+        mem_read_e1 <= mem_read_d;
+        mem_write_e1 <= mem_write_d;
+        jump_e1 <= jump_d;
+        branch_e1 <= branch_d;
+        alu_control_e1 <= alu_control_d;
+        alu_src_e1 <= alu_src_d;
+        rd1_e1 <= rd1_d;
+        rd2_e1 <= rd2_d;
+        rs1_e1 <= rs1_d;
+        rs2_e1 <= rs2_d;
+        pc_e1 <= pc_d;
+        rd_e1 <= rd_d;
+        imm_ext_e1 <= imm_ext_d;
+        pc_plus4_e1 <= pc_plus4_d;
+        pred_taken_e1 <= pred_taken_d;
+        pred_pc_e1 <= pred_pc_d;
     end
 end
 
