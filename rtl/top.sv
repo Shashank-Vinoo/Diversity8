@@ -9,6 +9,8 @@ module top(
     logic [31:0] next_pc;
     logic [31:0] pc_plus4_f;
     logic [31:0] branch_pc;
+    logic [31:0] pred_pc_f;
+    logic pred_taken_f;
 
     //Control unit
     logic [31:0] instr_f;
@@ -64,6 +66,8 @@ module top(
     logic [4:0]  rd_e;
     logic [31:0] imm_ext_e;
     logic [31:0] pc_plus4_e;
+    logic        pred_taken_e;
+    logic [31:0] pred_pc_e;
 
     // Execute->Mem 
     logic        reg_write_m;
@@ -99,21 +103,38 @@ module top(
     // Stalling
     logic stall;
     logic [31:0] next_pc_gated; // determine next_pc based on stall
+    logic  mispredict_e;
+    logic [31:0] correct_pc_e;
+    logic upd_bt;
+    logic pred_taken_d;
+    logic [31:0] pred_pc_d;
 
     assign result_src_d = {1'b0, result_src}; 
 
-
     assign take_branch = (branch_e[0] & alu_zero) | (branch_e[1] & ~alu_zero) | jump_e;
-    
-   
-   
+    assign correct_pc_e = take_branch ? branch_pc : pc_plus4_e;
+    assign mispredict_e = (pred_taken_e != take_branch) || (take_branch && pred_taken_e && (pred_pc_e != branch_pc));
+    assign upd_bt = jump_e | (branch_e != 2'b00);
 
     branch_pc_adder branch_pc_adder_i(
         .pc(pc_e),
         .imm_ext(imm_ext_e),
         .branch_pc(branch_pc)
     );
+
+    branch_predictor branch_predictor_i(
+        .clk(clk),
+        .rst(rst),
+        .pc_fetch(pc),
+        .pred_pc(pred_pc_f),
+        .pred_taken(pred_taken_f),
+        .upd_bt(upd_bt),
+        .pc_e(pc_e),
+        .upd_taken(take_branch),
+        .upd_target(branch_pc)
+    );
      
+    assign next_pc = mispredict_e ? correct_pc_e : pred_pc_f;
     assign next_pc_gated = stall ? pc : next_pc;
 
     pc_reg pc_reg_i(
@@ -121,13 +142,6 @@ module top(
         .rst(rst),
         .next_pc(next_pc_gated),
         .pc(pc)
-    );
-
-    pc_src_mux pc_src_mux_i(
-        .pc_src(take_branch),
-        .branch_pc(branch_pc),
-        .pc_plus4(pc_plus4_f),
-        .next_pc(next_pc)
     );
 
     // instruction decode
@@ -239,10 +253,14 @@ module top(
         .instr_f(instr_f),
         .pc_f(pc),
         .pc_plus4_f(pc_plus4_f),
+        .pred_taken_f(pred_taken_f),
+        .pred_pc_f(pred_pc_f),
 
         .instr_d(instr_d),
         .pc_d(pc_d),
-        .pc_plus4_d(pc_plus4_d)
+        .pc_plus4_d(pc_plus4_d),
+        .pred_taken_d(pred_taken_d),
+        .pred_pc_d(pred_pc_d)
     );
 
     
@@ -266,6 +284,8 @@ module top(
         .rd_d(rd_addr),
         .imm_ext_d(imm_ext_d),
         .pc_plus4_d(pc_plus4_d),
+        .pred_taken_d(pred_taken_d),
+        .pred_pc_d(pred_pc_d),
 
         .reg_write_e(reg_write_e),
         .result_src_e(result_src_e),
@@ -282,7 +302,9 @@ module top(
         .pc_e(pc_e),
         .rd_e(rd_e),
         .imm_ext_e(imm_ext_e),
-        .pc_plus4_e(pc_plus4_e)
+        .pc_plus4_e(pc_plus4_e),
+        .pred_taken_e(pred_taken_e),
+        .pred_pc_e(pred_pc_e)
     );
 
 
@@ -329,7 +351,7 @@ module top(
     assign flush_pipe = rst | flush;
 
     hazard_unit hazard_unit_i(
-        .branch(take_branch),
+        .branch(mispredict_e),
         .flush(flush),
 
         .rs1_d(rs1_addr),

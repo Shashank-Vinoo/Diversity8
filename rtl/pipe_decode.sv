@@ -17,6 +17,8 @@ module pipe_decode (
     input logic [4:0] rd_d,
     input logic [31:0] imm_ext_d,
     input logic [31:0] pc_plus4_d,
+    input logic        pred_taken_d,
+    input logic [31:0] pred_pc_d,
     
     output logic reg_write_e,
     output logic [1:0] result_src_e,
@@ -33,7 +35,9 @@ module pipe_decode (
     output logic [31:0] pc_e,
     output logic [4:0] rd_e,
     output logic [31:0] imm_ext_e,
-    output logic [31:0] pc_plus4_e
+    output logic [31:0] pc_plus4_e,
+    output logic        pred_taken_e,
+    output logic [31:0] pred_pc_e
 );
 
 always_ff @(posedge clk) begin
@@ -54,6 +58,8 @@ always_ff @(posedge clk) begin
         rd_e <= 5'b0;
         imm_ext_e <= 32'b0;
         pc_plus4_e <= 32'b0;
+        pred_taken_e <= 1'b0;
+        pred_pc_e <= 32'b0;
     end 
     else begin
         reg_write_e <= reg_write_d;
@@ -72,6 +78,8 @@ always_ff @(posedge clk) begin
         rd_e <= rd_d;
         imm_ext_e <= imm_ext_d;
         pc_plus4_e <= pc_plus4_d;
+        pred_taken_e <= pred_taken_d;
+        pred_pc_e <= pred_pc_d;
     end
 end
 
