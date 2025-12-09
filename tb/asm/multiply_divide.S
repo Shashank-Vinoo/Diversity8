@@ -1,43 +1,47 @@
-# high values required to ensure that mulh/s/u cause
-# some values besides 0 stored in registers 
     .text
     .globl main
 
 main:
-    # Operands
-    addi x1, x0, 70000       # x1 = 70000 (signed)
-    addi x2, x0, 80000       # x2 = 80000 (unsigned)
-    addi x3, x0, 123         # x3 = 123
+    addi a0, x0, 0       # accumulator = 0
 
-    addi a0, x0, 0           # a0 = 0 accumulator
+    # x1 = 1500
+    addi x1, x0, 1000
+    addi x1, x1, 500
 
-    # multiplication tests
-    mul    t0, x1, x2        # low 32 bits of 70000*80000
-    add    a0, a0, t0        # a0 += 511180800
+    # x2 = 1200
+    addi x2, x0, 800
+    addi x2, x2, 400
 
-    mulh   t1, x1, x2        # signed* signed
-    add    a0, a0, t1        # a0 += 5215
+    # x3 = 123
+    addi x3, x0, 123
 
-    mulhsu t2, x1, x2        # signed * unsigned
-    add    a0, a0, t2        # a0 += 5215
+#multiplication tests
+    mul    t0, x1, x2
+    add    a0, a0, t0       # a = 1800000
 
-    mulhu  t3, x2, x3        # unsigned*unsigned
-    add    a0, a0, t3        # a0 += 0
+    mulh   t1, x1, x2
+    add    a0, a0, t1       # a = 1800000
 
-    # Division + remainder tests
-    div    t4, x1, x3        # 70000 / 123 = 569
-    add    a0, a0, t4        # a0 += 569
+    mulhsu t2, x1, x2
+    add    a0, a0, t2       # a = 1800000
 
-    divu   t5, x2, x3        # 80000 / 123 = 650
-    add    a0, a0, t5        # a0 += 650
+    mulhu  t3, x2, x3   
+    add    a0, a0, t3       # a = 1800000
 
-    rem    t6, x1, x3        # 70000 % 123 = 29
-    add    a0, a0, t6        # a0 += 29
+#division and remainder tests
+    div    t4, x1, x3
+    add    a0, a0, t4       # a = 1800000 + 12
 
-    remu   t7, x2, x3        # 80000 % 123 = 5
-    add    a0, a0, t7        # a0 += 5
+    divu   t5, x2, x3
+    add    a0, a0, t5       # a = 1800012 + 9
 
-# final a0 = 511,192,483
+    rem    t6, x1, x3
+    add    a0, a0, t6       # a = 1800021 + 24
+
+    remu   t6, x2, x3   
+    add    a0, a0, t6       # a = 1800045 + 93
+
+#final a = 1800138
 
 finish:
-    beq x0, x0, finish       # infinite loop
+    beq x0, x0, finish      # infinite loop     

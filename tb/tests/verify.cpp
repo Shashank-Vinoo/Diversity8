@@ -211,7 +211,8 @@ TEST_F(CpuTestbench, Multiply_Divide)
         runSimulation();
     }
 
-    if (top->a0 == 511, 192, 483)
+    if (top->a0 == 1800138)
+
     {
         success = true;
         SUCCEED();
