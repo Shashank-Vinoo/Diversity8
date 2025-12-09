@@ -21,9 +21,13 @@
   - [ ] Testbench for cache
 - [ ] Extensions
   - [ ] Branch prediction
-  - [ ] Multilpy extension
+    - [x] Implement branch prediction
+    - [ ] Testbench for branch prediction
+  - [ ] Multiply extension
+    - [x] Implement multiply in ALU and CU
+    - [ ] Testbench for multiply
   - [ ] FPGA
-  - [ ] Superscalar architecture?
+  - [x] Deep pipelining
 
 ---
 
