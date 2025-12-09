@@ -19,15 +19,15 @@
   - [x] Implementing cache
   - [x] Integrate cache
   - [ ] Testbench for cache
-- [ ] Extensions
-  - [ ] Branch prediction
+- [x] Extensions
+  - [x] Branch prediction
     - [x] Implement branch prediction
-    - [ ] Testbench for branch prediction
+    - [x] Testbench for branch prediction
   - [x] Multiply extension
     - [x] Implement multiply in ALU and CU
     - [x] Testbench for multiply
-  - [ ] FPGA
   - [x] Deep pipelining
+  - [ ] ~~FPGA~~
 
 ---
 
