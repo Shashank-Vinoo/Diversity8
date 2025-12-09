@@ -23,9 +23,9 @@
   - [ ] Branch prediction
     - [x] Implement branch prediction
     - [ ] Testbench for branch prediction
-  - [ ] Multiply extension
+  - [x] Multiply extension
     - [x] Implement multiply in ALU and CU
-    - [ ] Testbench for multiply
+    - [x] Testbench for multiply
   - [ ] FPGA
   - [x] Deep pipelining
 
