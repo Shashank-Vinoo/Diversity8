@@ -194,6 +194,48 @@ TEST_F(CpuTestbench, GeneralHazards)
     }
 }
 
+TEST_F (CpuTestbench, Multiply_Divide)
+{
+    compile("asm/multiply_divide.S");
+    resetCpu();
+
+    bool success = false;
+
+    for(int i = 0; i < CYCLES; i++){
+        runSimulation();
+    }
+
+    if(top->a0 == 511,192,483){
+        success = true;
+        SUCCEED();
+    }
+
+    if(!success){
+        FAIL() << "Multiply_Divide test failed, a0 != -178. Current a0 : " << top->a0;
+    }
+}
+
+TEST_F (CpuTestbench, DivisionByZero)
+{
+    compile("asm/division_by_zero.S");
+    resetCpu();
+
+    bool success = false;
+
+    for(int i = 0; i < CYCLES; i++){
+        runSimulation();
+    }
+
+    if(top->a0 == 244){
+        success = true;
+        SUCCEED();
+    }
+
+    if(!success){
+        FAIL() << "Division by zero test failed, a0 != 244. Current a0 : " << top->a0;
+    }
+}
+
 
 
 int main(int argc, char **argv)
