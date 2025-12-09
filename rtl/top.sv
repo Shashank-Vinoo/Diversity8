@@ -88,6 +88,7 @@ module top(
     logic        reg_write_m1;
     logic [1:0]  result_src_m1;
     logic        mem_write_m1;
+    logic        mem_read_m1;
     logic [31:0] alu_result_m1;
     logic [31:0] write_data_m1;
     logic [4:0]  rd_m1;
@@ -276,6 +277,8 @@ module top(
         .pc_plus4_m1(pc_plus4_m1)
     );
 
+    assign mem_read_m1 = (result_src_m1 == 2'b01);
+
     data_mem data_mem_i(
         .addr(alu_result_m1),
         .clk(clk),
@@ -288,6 +291,7 @@ module top(
         .clk(clk),
         .rst(rst),
         .addr(alu_result_m1[31:2]),
+        .read_en(mem_read_m1),
         .write_en(mem_write_m1),
         .write_data(write_data_m1),
         .backing_read_data(backing_read_data),

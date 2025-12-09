@@ -90,7 +90,7 @@ TEST_F(CpuTestbench, StoreLoad)
     // running enough cycles for lw to work
     for (int i = 0; i < 40; i++)
         runSimulation(1);
-    
+
     if (top->a0 == 10)
     {
         success = true;
@@ -140,7 +140,7 @@ TEST_F(CpuTestbench, DataHazards)
     // running enough cycles for lw to work
     for (int i = 0; i < CYCLES; i++)
         runSimulation(1);
-    
+
     if (top->a0 == 21)
     {
         success = true;
@@ -160,17 +160,19 @@ TEST_F(CpuTestbench, LoadUseHazard)
 
     bool success = false;
 
-    for (int i = 0; i < CYCLES; i++) {
+    for (int i = 0; i < CYCLES; i++)
+    {
         runSimulation(1);
-
     }
 
-    if (top->a0 == 20) {
+    if (top->a0 == 20)
+    {
         success = true;
         SUCCEED();
     }
 
-    if (!success) {
+    if (!success)
+    {
         FAIL() << "Load-use hazard failed, a0 != 20. Current a0: " << top->a0;
     }
 }
@@ -182,61 +184,68 @@ TEST_F(CpuTestbench, GeneralHazards)
 
     bool success = false;
 
-    for (int i = 0; i < CYCLES; i++) {
+    for (int i = 0; i < CYCLES; i++)
+    {
         runSimulation(1);
     }
-    if (top->a0 == 28) {
+    if (top->a0 == 28)
+    {
         success = true;
         SUCCEED();
     }
-    if (!success) {
+    if (!success)
+    {
         FAIL() << "GeneralHazards failed, a0 != 28. Current a0: " << top->a0;
     }
 }
 
-TEST_F (CpuTestbench, Multiply_Divide)
+TEST_F(CpuTestbench, Multiply_Divide)
 {
     compile("asm/multiply_divide.S");
     resetCpu();
 
     bool success = false;
 
-    for(int i = 0; i < CYCLES; i++){
+    for (int i = 0; i < CYCLES; i++)
+    {
         runSimulation();
     }
 
-    if(top->a0 == 511,192,483){
+    if (top->a0 == 511, 192, 483)
+    {
         success = true;
         SUCCEED();
     }
 
-    if(!success){
+    if (!success)
+    {
         FAIL() << "Multiply_Divide test failed, a0 != -178. Current a0 : " << top->a0;
     }
 }
 
-TEST_F (CpuTestbench, DivisionByZero)
+TEST_F(CpuTestbench, DivisionByZero)
 {
     compile("asm/division_by_zero.S");
     resetCpu();
 
     bool success = false;
 
-    for(int i = 0; i < CYCLES; i++){
+    for (int i = 0; i < CYCLES; i++)
+    {
         runSimulation();
     }
 
-    if(top->a0 == 244){
+    if (top->a0 == 244)
+    {
         success = true;
         SUCCEED();
     }
 
-    if(!success){
+    if (!success)
+    {
         FAIL() << "Division by zero test failed, a0 != 244. Current a0 : " << top->a0;
     }
 }
-
-
 
 int main(int argc, char **argv)
 {
