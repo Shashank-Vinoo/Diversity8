@@ -12,7 +12,8 @@ public:
     // Runs the simulation for a clock cycle, evaluates the DUT, dumps waveform.
     void runSimulation(int cycles = 1)
     {
-        for (int i = 0; i < cycles; i++) {
+        for (int i = 0; i < cycles; i++)
+        {
             // Drive a full low->high cycle and evaluate after each edge so
             // reset/pipeline flops see the intended clock transition.
             top->clk = 0;
@@ -27,7 +28,8 @@ public:
             tfp->dump(2 * ticks + 1);
 #endif
 
-            if (Verilated::gotFinish()) {
+            if (Verilated::gotFinish())
+            {
                 exit(0);
             }
             ticks++;
@@ -37,6 +39,10 @@ public:
     void compile(const std::string &program)
     {
         // Compile
-        system(("./compile.sh " + program).c_str());
+        int ret = system(("./compile.sh " + program).c_str());
+        if (ret != 0)
+        {
+            FAIL() << "Compilation failed for " << program;
+        }
     }
 };
