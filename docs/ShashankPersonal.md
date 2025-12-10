@@ -210,4 +210,3 @@ If I were to repeat this project:
 
 Overall, I am satisfied with the areas I owned: setting up the early infrastructure, building strong hazard focused tests, and pushing the design in the direction of more realistic features like set associative cache and branch prediction for a faster CPU in realtime regardless of simulation behaviour. This project was a significant step up in both technical depth and in working inside a hardware/verification team.
 
-These skills will be useful for my future internship in ARM GPU CE-CT team.
