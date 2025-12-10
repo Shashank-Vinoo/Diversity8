@@ -163,6 +163,8 @@ Created a comprehensive testbench for a 2-way set associative cache, verifying r
 
 - [Cache_tb](https://github.com/Shashank-Vinoo/Diversity8/commit/2462e8164386f673b1bc538e4615ad73b8613d7a)
   - Added a few tests to see if the cache was behaving as expected
+- [Minor correction](https://github.com/Shashank-Vinoo/Diversity8/commit/fa80dcbbf41c272514a7b83ffd08f2e7ba7a2fb5)
+
 
 
 ---

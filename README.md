@@ -15,10 +15,10 @@
     - [x] Data hazard handling by forwarding
     - [x] Control hazard handling by stalling
     - [x] Stalling for lw data dependency
-- [ ] Cached processor
+- [x] Cached processor
   - [x] Implementing cache
   - [x] Integrate cache
-  - [ ] Testbench for cache
+  - [x] Testbench for cache
 - [x] Extensions
   - [x] Branch prediction
     - [x] Implement branch prediction
