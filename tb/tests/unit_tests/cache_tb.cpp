@@ -252,19 +252,19 @@ TEST_F(Cache_tb, Write_Miss_LRU) {
 
     EXPECT_EQ(top->read_data, 0x11111111);
 
-    //addr2 should have a new value as it was evicted
-    top->addr = addr2; 
-    top->backing_read_data = 0x44444444; 
-    tick();
-
-    EXPECT_EQ(top->read_data, 0x44444444);
-
     // addr3 value should be present
     top->addr = addr3; 
     tick();
 
     EXPECT_EQ(top->read_data, 0x33333333);
 
+
+    // addr2 should have a new value as it was evicted
+    top->addr = addr2; 
+    top->backing_read_data = 0x44444444; 
+    tick();
+
+    EXPECT_EQ(top->read_data, 0x44444444);
 
 }
 
