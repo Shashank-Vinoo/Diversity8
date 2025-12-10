@@ -1,4 +1,4 @@
-# Personal Statement: Shashank Vinoo  
+# Personal Statement: Rishabh Rastogi  
 
 **Name:** Rishabh Rastogi  
 **CID:** 02555762  
@@ -12,6 +12,7 @@
   - [Pipeline: pipe_write and data mux](#pipeline-pipe_write-and-data-mux)  
   - [Control hazard and lw hazard](#control-hazard-and-lw-hazard)  
   - [MULDIV extension](#muldiv)  
+  - [Testing the Cache](#tb-for-cache)
 - [What I learned](#what-i-learned)  
 - [Mistakes I made](#mistakes-i-made)  
 - [What I would do differently](#what-i-would-do-differently)  
@@ -47,6 +48,9 @@ My main contributions to the project were:
   - Example:  
     - [Skeleton](https://github.com/Shashank-Vinoo/Diversity8/commit/a941b43b264718db1fd1b3b9055846e5696f9293)
     - [Control side](https://github.com/Shashank-Vinoo/Diversity8/commit/a08ddfb9b9d4946bd86c6267b4a925626971f23b)
+- Created the testbench which verifies the 2-way cache, covering reset behavior, read and write hits, read and write misses, and correct LRU replacement.
+  - Example:
+    - [Cache_tb](https://github.com/Shashank-Vinoo/Diversity8/commit/2462e8164386f673b1bc538e4615ad73b8613d7a)
 
 Across these areas I often took on infrastructure and difficult “glue” pieces: hazard tests, cache experiments, branch prediction, and keeping the testbench strong enough to catch real bugs.
 
@@ -108,10 +112,10 @@ Relevant commits:
 Contribuitions:
 
 - Control hazard 
-  -[Control hazard](https://github.com/Shashank-Vinoo/Diversity8/commit/18643260446bd29524db2435eca33265bf85a868)
+  - [Control hazard](https://github.com/Shashank-Vinoo/Diversity8/commit/18643260446bd29524db2435eca33265bf85a868)
     - Correct logic is implemented here
-  -[Adding it to the hazard unit module](https://github.com/Shashank-Vinoo/Diversity8/commit/79c1112fc5089bb86aa9b11746f4bca6a0478ab2)
-  -[Changing top to allow the detection of a branch](https://github.com/Shashank-Vinoo/Diversity8/commit/79c1112fc5089bb86aa9b11746f4bca6a0478ab2)
+  - [Adding it to the hazard unit module](https://github.com/Shashank-Vinoo/Diversity8/commit/79c1112fc5089bb86aa9b11746f4bca6a0478ab2)
+  - [Changing top to allow the detection of a branch](https://github.com/Shashank-Vinoo/Diversity8/commit/79c1112fc5089bb86aa9b11746f4bca6a0478ab2)
 
 - lw Hazard
   - [Initial design](https://github.com/Shashank-Vinoo/Diversity8/commit/455ebd029d9602a3cf9a46785a65de6d03323451)
@@ -136,16 +140,16 @@ Contribuitions:
     - Control
       - MULDIV differs from the other instructions by looking at `func7`
       - However the control unit from before would check `funct3` first
-      - So I decided to create another if statement as when it is `funct7 == 0000001` then it is a MULDIV instruction
+      - So I decided to create another case arguement for MULDIV instruction
       - Finally need to increase bits of `ALUCtrl` so that the alu can take on more instructions
     - ALU 
       - MUL, MULH, MULSH all do different arithemetic so need to account for that
       - DIV instructions need to account for what happens when we divide by zero
         - e.g. set all the resulting bits to 1
--[New Control unit](https://github.com/Shashank-Vinoo/Diversity8/commit/a08ddfb9b9d4946bd86c6267b4a925626971f23b)
+- [New Control unit](https://github.com/Shashank-Vinoo/Diversity8/commit/a08ddfb9b9d4946bd86c6267b4a925626971f23b)
   - Simple combinational logic
   - Changed `Alucontrol` to have 4 bits in the pipes as well
--[Handling for division by 0](https://github.com/Shashank-Vinoo/Diversity8/commit/9ef98ba502de892da83ca5beae3cc407aa8b9398)
+- [Handling for division by 0](https://github.com/Shashank-Vinoo/Diversity8/commit/9ef98ba502de892da83ca5beae3cc407aa8b9398)
   - Handles divison and remainder instruction for divisor 0 
 
 
@@ -153,27 +157,34 @@ Contribuitions:
 Overall the MULDIV instructions worked as expected after testing
 
 
+### TB for Cache
+
+Created a comprehensive testbench for a 2-way set associative cache, verifying reset behavior, read hits and misses, write hits, and LRU-based eviction for both reads and writes. The testbench ensured correct that the cache was functioning correctly.
+
+- [Cache_tb](https://github.com/Shashank-Vinoo/Diversity8/commit/2462e8164386f673b1bc538e4615ad73b8613d7a)
+  - Added a few tests to see if the cache was behaving as expected
+
 
 ---
 
 ## What I learned
 
-This project significantly developed both my technical skills and my approach to working in a hardware/verification codebase.
+This project helped me strengthen my technical skills, gain experience working with hardware and verification code, and improve how I collaborate with others.
 
 - **SystemVerilog and micro-architecture intuition**  
-  Working on `pipe_mem`, hazards, the cache, and branch prediction forced me to reason cycle-by-cycle through the pipeline. I now have a much clearer mental model of a pipelined RISC-V CPU than from lectures alone.
+  Having already built a single-cycle CPU, this project helped me understand the additional complexities of pipelined CPUs, including hazards, branch prediction, and memory interactions. Working through these in SystemVerilog gave me a much clearer model of how a real RISC-V CPU operates and taught me more about how hardware design works than the lectures were able to.
 
-- **Verification strategy and test design**  
-  Designing hazard-specific assembly tests and wrapping them in GTest taught me to:
-  - Isolate a bug into the smallest possible test.  
-  - Check a small number of architectural registers rather than relying on huge waveforms.  
-  - Treat failing tests as useful information rather than an annoyance.
+- **Hardware and Verification Conventions**  
+  - Learned the different naming conventions commonly used in hardware design.
+  - Gained insight into design decisions for creating modules that are both efficient and readable.
+  - Developed skills in writing testbenches in C++, which offer more flexibility compared to SystemVerilog.
+  - Learned how to use GTest effectively for automated hardware verification.
 
-- **Repo hygiene and tooling**  
-  The renaming and standardisation work showed how much time gets wasted when filenames and interfaces are inconsistent. Clean module names, working scripts and a reliable `verify.cpp` make it much easier for everyone to move fast.
+- **Repo hygiene and collaboration**  
+  Working on a complex top-level CPU with multiple collaborators taught me the importance of clear organization and disciplined version control. Keeping module names and interfaces consistent was crucial to avoid conflicts and ensure smooth integration. This experience showed how proper repo structure and collaboration practices allow a team to work efficiently on large, intricate hardware designs.
 
 - **Experimenting beyond the spec**  
-  The 2-way cache and branch predictor work showed how to explore more advanced features while keeping the main deliverable stable: branch off, prototype, partially verify, and only integrate when it’s ready.
+  The 2-way cache testbench allowed me to understand how our cache works and how to stress test it to the maximum. Also adding the extension of the MULDIV instructions introduced a few changes and bit of error handling which was not there before.
 
 ---
 
@@ -181,13 +192,13 @@ This project significantly developed both my technical skills and my approach to
 
 Some mistakes that stand out:
 
-- I spent **too much time on “future” features** (2-way cache, branch prediction) while some core single-cycle and pipeline blocks still needed extra support. That split my attention more than was ideal.
+- I initially doubted my own design for the **LW hazard handling**, which made me second guess myself and slowed progress. I learned that having more confidence in my designs and trusting my reasoning would have helped me move faster and avoid unnecessary self-doubt.
 
-- Some early commits (especially the foundation ones) were **too large and monolithic**, making them harder to review and understand.
+- Some commits were **too small and full of errors**, making the commit histroy hard to follow.
 
-- I did not use **co-authored commits** when pairing on changes, which now makes it harder to reconstruct joint work from the history alone.
+- I did not use **co-authored commits** when pairing on changes, which now makes it harder to reconstruct joint work from the history alone (e.g. lw hazard).
 
-- For hazards, I initially leaned towards **larger, more complex programs** before stepping back to write minimal sequences. Starting from simpler tests would have made the first debugging rounds faster.
+- Not enough **testing** of my designs due to proper testing from my partners took longer than expected I wasn't able to always ensure error free design of the modules I created.
 
 ---
 
@@ -195,12 +206,14 @@ Some mistakes that stand out:
 
 If I were to repeat this project:
 
-- I would **prioritise core correctness first**, putting more time into stabilising the single-cycle and pipeline cores before pushing advanced features like 2-way cache and predictors.
+- I would trust my own designs more and **consult others** in times of confusion, especially for complex cases like the LW hazard. Having more confidence and opinions from others would help avoid unnecessary self-doubt and speed up debugging.
 
-- I would keep **commits smaller and more focused**, especially for structural refactors, and use co-authored commits where appropriate.
+- I would ensure commits are **clear and meaningful**, avoiding small, error-prone commits that make the history hard to follow.
 
-- I would start from a **written test plan** for hazards, cache behaviours and branches, then implement minimal tests for each entry in that plan instead of jumping straight into long integration programs.
+- Assist on the testing of my own modules so that I am able to help in a more meaningful way and debug my code better.
 
-- I would push earlier for **stricter process on the `main` branch** (protected branch, required reviews on non-trivial changes) to avoid occasional breakages of the verification flow.
+- I would test my modules more thoroughly before relying on my group's verification, ensuring that each part of the design is correct and robust from the start.
 
-Overall, I am satisfied with the areas I owned: bootstrapping early infrastructure, building strong hazard-focused tests, and pushing the design in the direction of more realistic features like set-associative cache and branch prediction. This project was a significant step up in both technical depth and in working inside a hardware/verification team.
+- Reasearch on the extensions a bit further and see the design process and intuition behind them (e.g. super scalar architecture)
+
+Overall, I am satisfied with my contributions: developing foundational modules, implementing pipeline functionality, handling hazards, creating the testbench for the cache, and extending the CPU with MULDIV instructions. This project significantly improved my technical skills, deepened my understanding of pipelined CPU design, and gave me valuable experience collaborating on complex hardware projects with a focus on design implementation.
