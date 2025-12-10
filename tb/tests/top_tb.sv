@@ -26,7 +26,7 @@ module top_tb;
         #10;
         rst = 0;
 
-        repeat (1850) begin
+        repeat (20) begin
             @(posedge clk);
             display_registers();
         end

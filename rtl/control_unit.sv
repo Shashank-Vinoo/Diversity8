@@ -75,9 +75,8 @@ module control_unit(
             2'b00: alu_control = 4'b0000; // ADD
             2'b01: alu_control = 4'b0001; // SUB
             2'b10: begin
-                if (funct7 ==7'b0000001) begin
+                if ((opcode == 7'b0110011) && (funct7 == 7'b0000001)) begin
                     // MULDIV instructions
-
                     unique case (funct3)
                         3'b000: alu_control = 4'b1000; // MUL
                         3'b001: alu_control = 4'b1001; // MULH

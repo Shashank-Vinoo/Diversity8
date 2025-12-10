@@ -248,8 +248,6 @@ TEST_F(CpuTestbench, DivisionByZero)
     }
 }
 
-
-
 TEST_F(CpuTestbench, Cache)
 {
     compile("asm/cache.S");
@@ -270,10 +268,9 @@ TEST_F(CpuTestbench, Cache)
 
     if (!success)
     {
-        FAIL() << "Division by zero test failed, a0 != 42. Current a0 : " << top->a0;
+        FAIL() << "Cache error occured, a0 != 42. Current a0 : " << top->a0;
     }
 }
-
 
 int main(int argc, char **argv)
 {
