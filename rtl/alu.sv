@@ -20,10 +20,17 @@ module alu(
             4'b1001: alu_out = alu_op1[31:16] * alu_op2[31:16]; // upper 16 bits multiplication
             4'b1010: alu_out = alu_op1[31:16] * alu_op2[31:16];
             4'b1011: alu_out = alu_op1[31:16] * alu_op2[31:16];
+<<<<<<< Updated upstream
             4'b1100: alu_out = (alu_op2 != 32'b0)?alu_op1 / alu_op2: {32{1'b1}}; // if division by zero, return max value 
             4'b1101: alu_out = (alu_op2 != 32'b0)?alu_op1 / alu_op2: {32{1'b1}};
             4'b1110: alu_out = (alu_op2 != 32'b0)?alu_op1 % alu_op2: alu_op1; // if division by zero, return dividend
             4'b1111: alu_out = (alu_op2 != 32'b0)?alu_op1 % alu_op2: alu_op1;
+=======
+            4'b1100: alu_out = (alu_op2 == 0) ? -1 : alu_op1 / alu_op2;
+            4'b1101: alu_out = (alu_op2 == 0) ? -1 : alu_op1 / alu_op2;
+            4'b1110: alu_out = (alu_op2 == 0) ? alu_op1 : alu_op1 % alu_op2;
+            4'b1111: alu_out = (alu_op2 == 0) ? alu_op1 : alu_op1 % alu_op2;
+>>>>>>> Stashed changes
             default: alu_out = 32'b0;
         endcase
    end
