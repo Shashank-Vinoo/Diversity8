@@ -31,3 +31,4 @@ module alu(
     assign eq = alu_op1 == alu_op2;
 
 endmodule
+
